@@ -13,11 +13,10 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         description: {
-            type: Datatype.TEXT,
+            type: DataTypes.TEXT,
         },
         organizer_id: {
-            /* using user authentication, will need to attach the current user's
-               userID here to specify the organizer's ID. This may be called userID? */
+            type: DataTypes.INTEGER
         },
         img_url: {
             type: DataTypes.STRING,
@@ -38,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         location_state: {
-            type: DataTypes.VARCHAR(2),
+            type: DataTypes.CHAR(2),
             allowNull: false
         },
         location_zip: {

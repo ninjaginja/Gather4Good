@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Gather4Good</title>
-		
+
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Rubik" rel="stylesheet">
 
   <!-- Style CSS -->
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
 
 
@@ -26,8 +26,8 @@
   <nav style="height: 70px">
       <div class="nav-wrapper">
         <!-- Logo Image -->
-        <a href="#!" class="brand-logo"><img src="./images/gather-box-logo-small.png"></a>
-      
+        <a href="#!" class="brand-logo"><img src="./assets/images/gather-box-logo-small.png"></a>
+
       <!-- Navbar Links -->
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
@@ -48,18 +48,18 @@
   <div class="slider">
     <ul class="slides">
       <!-- First Image -->
-      <li><img class="responsive-img" src="./images/science_color.jpg"></li>
+      <li><img class="responsive-img" src="./assets/images/science_color.jpg"></li>
       <!-- Second Image -->
-      <li><img class="responsive-img" src="./images/protest-header_signs.jpg"></li>
+      <li><img class="responsive-img" src="./assets/images/protest-header_signs.jpg"></li>
       <!-- Third Image -->
-      <li><img class="responsive-img" src="./images/women.jpg"></li>
+      <li><img class="responsive-img" src="./assets/images/women.jpg"></li>
       <!-- Fourth Image -->
-      <li><img class="responsive-img" src="./images/immigrants.jpg"></li>
+      <li><img class="responsive-img" src="./assets/images/immigrants.jpg"></li>
       <!-- Fifth Image -->
-      <li><img class="responsive-img" src="./images/fullpride.jpg"></li>
+      <li><img class="responsive-img" src="./assets/images/fullpride.jpg"></li>
     </ul>
   </div>
-	
+
 </header>
 
   <!-- Modal Structure -->
@@ -83,29 +83,29 @@
     <div id="login" class="col s12">
       <!-- Section Header -->
       <h4 style="padding-top: 20px;">Enter Your Info</h4>
-          
+
       <!--  Login Form-->
       <div class="row">
         <form class="col s12">
           <!-- Email -->
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" class="validate">
-              <label for="email">Email</label>
+              <input id="login-email" type="email" class="validate">
+              <label for="login-email">Email</label>
             </div>
           </div>
           <!-- Password -->
           <div class="row">
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
+              <input id="login-password" type="password" class="validate">
+              <label for="login-password">Password</label>
             </div>
           </div>
         </form>
-      </div>   
+      </div>
     </div>
     </div>
- 
+
       <!-- Sign Up Tab -->
       <div id="signup" class="col s12" style="margin-left:11px">
         <!-- Section Header -->
@@ -132,22 +132,23 @@
             <div class="row">
               <!-- Email -->
               <div class="input-field col s12">
-                <input id="email" type="email" class="validate">
-                <label for="email">Email</label>
+                <input id="reg-email" type="email" class="validate">
+                <label for="reg-email">Email</label>
               </div>
             </div>
             <!-- Third Row -->
             <div class="row">
               <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
-                <label for="password">Password</label>
+                <input id="reg-password" type="password" class="validate">
+                <label for="reg-password">Password</label>
               </div>
             </div>
         </form>
       </div>
     </div>
     <!-- Submit Button -->
-    <button style="margin-bottom:24px" class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
+    <button id="register-btn" style="margin-bottom:24px" class="btn waves-effect waves-light right" type="submit" name="action">Submit (reg)</button>
+    <button id="login-btn" style="margin-bottom:24px" class="btn waves-effect waves-light right" type="submit" name="action">Submit (login) </button>
   </div>
 </div>
 
@@ -172,7 +173,7 @@
     <div class="col s12 m7" style="margin-left:10vw; margin-right:10vw">
     <!-- Header -->
     <h3 class="header" style="margin-left: 25px">Upcoming Events</h3>
-  
+
       <!-- First Card -->
       <div class="row">
       <div class="card horizontal hoverable">
@@ -234,7 +235,7 @@
         </div>
       </div>
       </div>
-      </div>        
+      </div>
     </div>
   </div>
 </main>
@@ -281,5 +282,6 @@ $(document).ready(function(){
   });
   });
 </script>
+<script type="text/javascript" src="assets/js/home.js" ></script>
 </body>
 </html>
