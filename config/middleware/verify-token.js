@@ -26,6 +26,6 @@ function verifyToken(req, res, next) {
     console.log(req.userID);
     next();
   });
-});
+};
 
 module.exports = router;

@@ -10,7 +10,6 @@ var secret_key = process.env.SECRET_KEY;
 // Attach middleware function (verifyToken) to protected routes //
 
 
-
 //**** ROUTES FOR LOGIN AND REGISTRATION ****//
 //=========================================//
 
