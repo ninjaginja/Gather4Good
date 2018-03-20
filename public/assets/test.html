@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>Gather4Good</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Gather4Good</title>
 		
-		<!-- Compiled and minified CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Rubik" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Rubik" rel="stylesheet">
 
-      <!-- Style CSS -->
+  <!-- Style CSS -->
   <link rel="stylesheet" type="text/css" href="./css/style.css">
 
 
@@ -24,9 +24,9 @@
 <header>
   <!-- NavBar -->
   <nav style="height: 70px">
-    <div class="nav-wrapper">
-      <!-- Logo Image -->
-      <a href="#!" class="brand-logo"><img src="./images/gather-box-logo-small.png"></a>
+      <div class="nav-wrapper">
+        <!-- Logo Image -->
+        <a href="#!" class="brand-logo"><img src="./images/gather-box-logo-small.png"></a>
       
       <!--  -->
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -46,19 +46,19 @@
 
   <!-- Image Gallery -->
   <div class="slider">
-      <ul class="slides">
-        <!-- First Image -->
-        <li><img class="responsive-img" src="./images/science_color.jpg"></li>
-        <!-- Second Image -->
-        <li><img class="responsive-img" src="./images/protest-header_signs.jpg"></li>
-        <!-- Third Image -->
-        <li><img class="responsive-img" src="./images/women.jpg"></li>
-        <!-- Fourth Image -->
-        <li><img class="responsive-img" src="./images/immigrants.jpg"></li>
-        <!-- Fifth Image -->
-        <li><img class="responsive-img" src="./images/fullpride.jpg"></li>
-      </ul>
-    </div>
+    <ul class="slides">
+      <!-- First Image -->
+      <li><img class="responsive-img" src="./images/science_color.jpg"></li>
+      <!-- Second Image -->
+      <li><img class="responsive-img" src="./images/protest-header_signs.jpg"></li>
+      <!-- Third Image -->
+      <li><img class="responsive-img" src="./images/women.jpg"></li>
+      <!-- Fourth Image -->
+      <li><img class="responsive-img" src="./images/immigrants.jpg"></li>
+      <!-- Fifth Image -->
+      <li><img class="responsive-img" src="./images/fullpride.jpg"></li>
+    </ul>
+  </div>
 	
 </header>
 
@@ -153,7 +153,7 @@
 
 <main>
   <!-- Cause Buttons -->
-  <div class="center-align" style="margin-top: 20px; padding-bottom: 20px">
+  <div class="center-align causes" style="margin-top: 20px; padding-bottom: 20px">
     <a class="waves-effect waves-light btn">Gender Equality</a>
     <a class="waves-effect waves-light btn">LGBTQ Rights</a>
     <a class="waves-effect waves-light btn">Environment</a>
@@ -164,6 +164,7 @@
     <a class="waves-effect waves-light btn">Immigration</a>
     <a class="waves-effect waves-light btn">Public Health</a>
     <a class="waves-effect waves-light btn">Economic Equality</a>
+    <a class="waves-effect waves-light btn">Gun Violence</a>
   </div>
 
   <!-- Events Div -->
@@ -178,9 +179,9 @@
       <div class="card-stacked">
         <div class="card-content">
           <!-- Title, Location, and Cause -->
-          <h4>March for Our Lives | <span class="location"> Denver, Colorado</span><div class="chip right">Human Rights</div></h4>
+          <h4>March for Our Lives | <span class="location"> Denver, Colorado</span><div class="chip right cause">Gun Violence</div></h4>
           <!-- Date and Time -->
-          <h5>Date: Saturday, March 24 | Time: 2:00 PM</h5>
+          <h5 id='date'>Date: Saturday, March 24 @ <span id='time'> 2:00 PM</span> </h5>
           <!-- Description -->
           <p>On March 24, the kids and families of March For Our Lives will take to the streets to demand that their lives and safety become a priority and that we end gun violence and mass shootings in our schools today. March with us in Washington DC or march in your own community. On March 24, the collective voices of the March For Our Lives movement will be heard.</p>
           <!-- Address -->
@@ -201,12 +202,11 @@
           <!-- Title, Location, and Cause -->
           <h4>Bith Bibble Jax | <span class="location"> Denver, Colorado</span><div class="chip right">LGBTQ Rights</div></h4>
           <!-- Date and Time -->
-          <h5>Date: Saturday, March 24
-          <br>Time: 2:00 PM</h5>
+          <h5 id='date'>Date: Saturday, March 24 @ <span id='time'> 2:00 PM</span> </h5>
           <!-- Description -->
           <p> Chewbacca vella tavion maris dexter elom moore calrissian neimoidian. Yuvernian antonio tierce cognus jek atrivis kamino poggle. Farlax sing trandoshan joruus motti skywalker.</p>
           <!-- Address -->
-          <h6>Location: <br><span class="address">Colorado State Capitol, 200 E Colfax Ave, Ste 136, Denver, CO 80203</span></h6>
+          <h6 class="right-align">Location: <br><span class="address">Colorado State Capitol, 200 E Colfax Ave, Ste 136, Denver, CO 80203</span></h6>
         </div>
         <div class="card-action">
           <a href="#">More Info</a>
@@ -222,12 +222,12 @@
         <div class="card-content">
           <!-- Title, Location, Cause -->
           <h4>Yuvernian Antonio Tierce | <span class="location"> Denver, Colorado</span><div class="chip right">Immigration</div></h4>
-          <!-- Date & Time -->
-          <h5>Date: Saturday, March 24 @ 2:00 PM</h5>
+          <!-- Date and Time -->
+          <h5 id='date'>Date: Saturday, March 24 @ <span id='time'> 2:00 PM</span> </h5>
           <!-- Description -->
           <p>Amanin antilles ziro mandell rotta dug omwati kuat darth. Selkath ig-88 timoliini ventress. Lucas ipsum dolor sit amet bail iv kastolar jax tano senesca nas chewbacca vestara sebulba.</p>
           <!-- Address -->
-          <h6>Location: <br><span class="address">Colorado State Capitol, 200 E Colfax Ave, Ste 136, Denver, CO 80203</span></h6>
+          <h6 class="right-align">Location: <br><span class="address">Colorado State Capitol, 200 E Colfax Ave, Ste 136, Denver, CO 80203</span></h6>
         </div>
         <div class="card-action">
           <a href="#">More Info</a>
@@ -260,26 +260,26 @@
 <!-- Front-End Javascript -->
 <script>
 $(document).ready(function(){
+  // Image Gallery
   $('.slider').slider({
     indicators: false,
     interval: 4000,
     transition: 2000,
-  }
-  );
-  $('.parallax').parallax();
-  $(".button-collapse").sideNav();
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    // $('.modal').modal();
-    $('.modal').modal({
-      dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
-      inDuration: 300, // Transition in duration
-      outDuration: 200, // Transition out duration
-      startingTop: '4%', // Starting top style attribute
-      endingTop: '10%', // Ending top style attribute
-    }
-  );
   });
-  </script>
+
+  // SideNav
+  $(".button-collapse").sideNav();
+
+  // Modal
+  $('.modal').modal({
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+    opacity: .5, // Opacity of modal background
+    inDuration: 300, // Transition in duration
+    outDuration: 200, // Transition out duration
+    startingTop: '4%', // Starting top style attribute
+    endingTop: '10%', // Ending top style attribute
+  });
+  });
+</script>
 </body>
 </html>
