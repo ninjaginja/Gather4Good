@@ -67,6 +67,10 @@ h6 {
     width: 90%;
 }
 
+.collapsible-header{
+    font-size: 18px;
+}
+
 /* Media Queries */
 @media only screen and (max-width: 992px) {
 
