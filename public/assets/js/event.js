@@ -1,64 +1,52 @@
 $(document).ready(function() {
 
-  //REGISTER NEW USER
-  $("#register-btn").on("click", function(event) {
-    var firstName = $("#first_name").val().trim();
-    var lastName = $("#last_name").val().trim();
-    var name = firstName + " " + lastName;
+  console.log(localStorage.getItem("token"));
 
-    var newUser = {
-      name: name,
-      email: $("#reg-email").val().trim(),
-      password: $("#reg-password").val().trim()
+  $("#new-event-btn").on("click", function(event) {
+    event.preventDefault();
+    var token = localStorage.getItem("token");
+
+    //Add validaiton logic here - e.g., if zip.length == 5 OK else return
+
+    console.log(token);
+
+    var newEvent = {
+      title: $("#event_name").val().trim(),
+      cause: "Animal rights",
+      time: "2016-08-09 07:42:28",
+      description: $("#event_description").val().trim(),
+      img_url: "www.image.com",
+      location_name: $("#location_name").val().trim(),
+      location_street: $("#street").val().trim(),
+      location_city: $("#city").val().trim(),
+      location_state: $("#state").val().trim(),
+      location_zip: $("#zipcode").val().trim()
+    };
+
+    console.log(newEvent);
+
+    var newEventSettings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://localhost:8080/api/events/create",
+        "method": "POST",
+        "headers": {
+          "x-access-token": token,
+          "Cache-Control": "no-cache",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "data": newEvent
     }
 
-    console.log(newUser);
-
-    $.ajax({
-      method: "POST",
-      url: "/api/register",
-      data: newUser
-    })
-    .done(function(data) {
-      console.log(data);
-      localStorage.setItem("jwt", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiJncmVnc2VtYWlsQGVtYWlsLmNvbSIsIm5hbWUiOiJncmVnb3J5IiwiaWF0IjoxNTIxNDg0MTIxLCJleHAiOjE1MjE1NzA1MjF9.MhYSRpw5Smc8YFkTcZmAq9B9AOvdrmIC-lRpEFUqcG8");
-      var jwt = localStorage.getItem("jwt");
-      console.log(jwt);
-    });
-  });
-
-//======================================
-
-  //LOGIN USER
-  $("#login-btn").on("click", function(event) {
-    event.preventDefault();
-
-    var settings = {
-          "async": true,
-          "crossDomain": true,
-          "url": "http://localhost:8080/api/auth/login",
-          "method": "POST",
-          "headers": {
-            "Cache-Control": "no-cache",
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          "data": loginInfo
-        }
-
-  $.ajax(settings)
+  $.ajax(newEventSettings)
     .done(function (response) {
       console.log(response);
-
-      //save token locally here
     })
     .fail(function(response) {
       console.log(typeof response);
       console.log(response);
       console.log(response.responseJSON.message);
-
-      //if responseJSON.message == wrong username, do smg
-      //if responseJSON.message ==  wrong password, do smg
     });
-  });
 
+  });
 });

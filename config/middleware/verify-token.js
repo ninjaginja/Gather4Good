@@ -6,26 +6,30 @@ var secret_key = process.env.SECRET_KEY;
 
 //Middleware function to attach to protected API routes
 function verifyToken(req, res, next) {
-  var token = req.headers['x-access-token'] || req.body.token || req.query.token;
-
-  if (token = "null") {
-    token = null;
-  }
+  var token = req.headers['x-access-token'];
+  var secret_key = process.env.SECRET_KEY;
 
   if (!token) {
     return res.status(401).json({auth: false, message: 'No token provided.'});
   }
 
-  jwt.verify(token, secret_key, function(err, decodedToken) {
+  jwt.verify(token, secret_key, function(err, decoded) {
     if (err) {
-      return res.status(500).json({ auth: false, message: 'Internal Server Error - Failed to authenticate token.' });
+      console.log(err);
+      if(err.message == "jwt expired") {
+        return res.status(401).json({ auth: false, message: 'Token expired' });
+      } else {
+        return res.status(500).json({ auth: false, message: 'Internal Server Error - Failed to authenticate token.' });
+      }
+    } else {
+      console.log("decoded token", decoded);
+      req.userID = decoded.id;
+      console.log(req.userID);
+      console.log(typeof req.userID);
+      next();
     }
 
-    console.log(decodedToken);
-    req.userID = decodedToken.id;
-    console.log(req.userID);
-    next();
   });
 };
 
-module.exports = router;
+module.exports = verifyToken;
