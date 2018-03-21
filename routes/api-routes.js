@@ -24,7 +24,7 @@ router.post('/register', function (req, res) {
         password: hashedPassword
       })
       .then(function(newUser) {
-        res.redirect(307, "/api/auth/login")
+        res.redirect(307, "/api/login")
       })
       .catch(function(err) {
         return res.status(500).send("There was a problem registering the user.");
