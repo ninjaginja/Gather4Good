@@ -46,6 +46,10 @@ $(document).ready(function() {
       console.log(typeof response);
       console.log(response);
       console.log(response.responseJSON.message);
+
+      $("#error-msg").text("Please login before submitting your events");
+      $("#modal1").modal("open");
+
     });
 
   });

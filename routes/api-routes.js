@@ -49,22 +49,31 @@ router.get("/events/causes/:cause", function(req, res) {
 // CREATES A NEW USER
 router.post('/register', function (req, res) {
 
-  //add logic here to check for existing email
+  db.User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(function(user) {
+    if(user) {
+      res.status(409).json({auth: false, id: null, message: "User already exists"})
+    } else {
 
-  var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+      var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
-  db.User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword
-      })
-      .then(function(newUser) {
-        res.redirect(307, "/api/login")
-      })
-      .catch(function(err) {
-        return res.status(500).send("There was a problem registering the user.");
-      })
-});
+      db.User.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword
+          })
+          .then(function(newUser) {
+            res.redirect(307, "/api/login")
+          })
+          .catch(function(err) {
+            return res.status(500).send("There was a problem registering the user.");
+          })
+      }
+    });
+  });
 
 
 //LOGS-IN AN EXISTING USER
