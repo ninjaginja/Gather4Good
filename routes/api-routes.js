@@ -9,6 +9,42 @@ var secret_key = process.env.SECRET_KEY;
 //INSERT other API Routes Here - Attach to "router" instance to export//
 // Attach middleware function (verifyToken) to protected routes //
 
+//**** ROUTES FOR HANDLING EVENTS ****//
+//=========================================//
+
+//CREATES A NEW EVENT **PROTECTED**
+
+//JOINS AN EVENT **PROTECTED**
+
+//GETS ALL EVENTS
+router.get("/api/events", function(req, res) {
+  db.Event.findAll({}).then(function(events) {
+    res.json(events)
+  });
+});
+
+//GETS ONE EVENT
+router.get("api/events/:id", function(req, res) {
+  db.Event.findOne({
+    where: {
+      id: req.perams.id 
+    }
+  }).then(function(event) {
+    res.json(event);
+  });
+});
+
+//GETS EVENTS BY CAUSE
+router.get("api/events/causes/:cause", function(req, res) {
+  db.Event.findAll({
+    where: {
+      cause: req.perams.cause
+    }
+  }).then(function(events) {
+    res.json(events);
+  });
+});
+
 
 //**** ROUTES FOR LOGIN AND REGISTRATION ****//
 //=========================================//
