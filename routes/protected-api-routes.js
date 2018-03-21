@@ -13,9 +13,9 @@ router.post('/events/create', function (req, res) {
 });
 
 router.get('/user_info', function (req, res) {
-  //Call this function as soon as a page loads to determine
-  //whether to display
-  req.body.organizer_id = req.userID;
+
+  //Send ID if token exists and valid
+  res.json({auth: true, id: req.userID, message: "Authenticated"});
 
 });
 
