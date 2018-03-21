@@ -11,6 +11,8 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         password: {
+            type: DataTypes.STRING,
+            allowNull: false
             // built into the user authentication? Hashed in database?
         }
     });

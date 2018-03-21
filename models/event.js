@@ -16,8 +16,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
         },
         organizer_id: {
-            /* using user authentication, will need to attach the current user's
-               userID here to specify the organizer's ID. This may be called userID? */
+            type: DataTypes.INTEGER
         },
         img_url: {
             type: DataTypes.STRING,

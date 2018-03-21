@@ -21,8 +21,8 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("public"));
 
 //*********   MOUNT ROUTES HERE   *********//
-// app.use("/api", apiRoutes);
-// app.use("/", htmlRoutes);
+app.use("/api", apiRoutes);
+app.use("/", htmlRoutes);
 
 // Sync our sequelize models and then starting our Express app
 db.sequelize.sync().then(function() {
