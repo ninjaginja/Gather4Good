@@ -24,7 +24,7 @@ router.get("/events", function(req, res) {
 router.get("/events/:id", function(req, res) {
   db.Event.findOne({
     where: {
-      id: req.perams.id 
+      id: req.perams.id
     }
   }).then(function(event) {
     res.json(event);
@@ -80,7 +80,7 @@ router.post('/login', function (req, res) {
       return res.status(404).json({
         auth: false,
         token: null,
-        message: 'User not found.'
+        message: 'User not found'
       });
 
     } else if(user) {
@@ -91,7 +91,7 @@ router.post('/login', function (req, res) {
         return res.status(401).json({
           auth: false,
           token: null,
-          message: 'Wrong password.'
+          message: 'Wrong password'
         });
       }
 

@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+  //add function that will immediately make GET request
+  //to protected user_info endpoint on page load - if user data returned (i.e., a token exists),
+  //then hide login/reg and show logout. Otherwise, show credentials
+
   //REGISTER NEW USER
   $("#register-btn").on("click", function(event) {
     var firstName = $("#first_name").val().trim();
@@ -24,7 +28,8 @@ $(document).ready(function() {
       localStorage.setItem("token", data.token);
       var token = localStorage.getItem("token");
       console.log(token);
-    });
+      hideLoginAndDismissModal();
+    })
   });
 
 //======================================
@@ -50,6 +55,7 @@ $(document).ready(function() {
       localStorage.setItem("token", data.token);
       var token = localStorage.getItem("token");
       console.log(token);
+      hideLoginAndDismissModal();
     })
     .fail(function(response) {
       console.log(typeof response);
@@ -57,4 +63,11 @@ $(document).ready(function() {
       console.log(response.responseJSON.message);
     });
   });
+
+  function hideLoginAndDismissModal() {
+    $(".modal-trigger").hide();
+    setTimeout(function(){ $("#modal1").modal("close"); }, 600);
+    //show logout display
+  }
+
 });
