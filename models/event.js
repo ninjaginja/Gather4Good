@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         description: {
-            type: Datatype.TEXT,
+            type: DataTypes.TEXT,
         },
         organizer_id: {
             /* using user authentication, will need to attach the current user's
@@ -38,22 +38,14 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         location_state: {
-            type: DataTypes.VARCHAR(2),
+            type: DataTypes.STRING(2),
             allowNull: false
         },
         location_zip: {
-            type: DataTypes.CHAR(5),
+            type: DataTypes.STRING(5),
             allowNull: false
         }
     });
-
-    Event.associate = function(models) {
-        Event.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
 
     return Event;
 }
