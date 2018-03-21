@@ -2,10 +2,13 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 var db = require("./models");
+var verifyToken = require("./config/middleware/verify-token.js")
 require("dotenv").config();
+
 
 //Require routes for mounting
 var apiRoutes = require("./routes/api-routes.js");
+var protectedApiRoutes = require("./routes/protected-api-routes.js");
 var htmlRoutes = require("./routes/html-routes.js");
 
 var app = express();
@@ -23,6 +26,9 @@ app.use(express.static("public"));
 //*********   MOUNT ROUTES HERE   *********//
 app.use("/api", apiRoutes);
 app.use("/", htmlRoutes);
+
+app.use(verifyToken);
+app.use("/api", protectedApiRoutes);
 
 // Sync our sequelize models and then starting our Express app
 db.sequelize.sync().then(function() {

@@ -3,11 +3,8 @@ var bcrypt = require('bcryptjs');
 var db = require("../models");
 var express = require("express");
 var router = express.Router();
-var verifyToken = require("../config/middleware/verify-token.js")
-var secret_key = process.env.SECRET_KEY;
 
 //INSERT other API Routes Here - Attach to "router" instance to export//
-// Attach middleware function (verifyToken) to protected routes //
 
 //**** ROUTES FOR HANDLING EVENTS ****//
 //=========================================//
@@ -52,6 +49,8 @@ router.get("/events/causes/:cause", function(req, res) {
 // CREATES A NEW USER
 router.post('/register', function (req, res) {
 
+  //add logic here to check for existing email
+
   var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
   db.User.create({
@@ -70,6 +69,7 @@ router.post('/register', function (req, res) {
 
 //LOGS-IN AN EXISTING USER
 router.post('/login', function (req, res) {
+  var secret_key = process.env.SECRET_KEY;
 
   //Find the user
   db.User.findOne({
@@ -80,25 +80,22 @@ router.post('/login', function (req, res) {
       return res.status(404).json({
         auth: false,
         token: null,
-        message: 'Authentication failed. User not found.'
+        message: 'User not found.'
       });
 
     } else if(user) {
-      //Check if password matches
+
       var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
       if(!passwordIsValid) {
         return res.status(401).json({
           auth: false,
           token: null,
-          message: 'Authentication failed. Wrong password.'
+          message: 'Wrong password.'
         });
       }
 
-      var token = jwt.sign({id: user.id, email: user.email, name: user.name},
-                            secret_key,
-                            {expiresIn: 86400});
-
+      var token = jwt.sign({id: user.id, name: user.name, email: user.email}, secret_key, {expiresIn: "2h"});
       res.status(200).json({ auth: true, token: token });
     }
 
