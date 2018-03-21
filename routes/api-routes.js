@@ -17,14 +17,14 @@ var secret_key = process.env.SECRET_KEY;
 //JOINS AN EVENT **PROTECTED**
 
 //GETS ALL EVENTS
-router.get("/api/events", function(req, res) {
+router.get("/events", function(req, res) {
   db.Event.findAll({}).then(function(events) {
     res.json(events)
   });
 });
 
 //GETS ONE EVENT
-router.get("api/events/:id", function(req, res) {
+router.get("/events/:id", function(req, res) {
   db.Event.findOne({
     where: {
       id: req.perams.id 
@@ -35,7 +35,7 @@ router.get("api/events/:id", function(req, res) {
 });
 
 //GETS EVENTS BY CAUSE
-router.get("api/events/causes/:cause", function(req, res) {
+router.get("/events/causes/:cause", function(req, res) {
   db.Event.findAll({
     where: {
       cause: req.perams.cause
