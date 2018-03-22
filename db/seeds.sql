@@ -14,3 +14,14 @@ VALUES
 
 
 INSERT INTO causes(cause) VALUES ("Gender Equality");
+INSERT INTO causes(cause) VALUES ("LGBTQ Rights");
+INSERT INTO causes(cause) VALUES ("Environment");
+INSERT INTO causes(cause) VALUES ("Racial Equality");
+INSERT INTO causes(cause) VALUES ("Animal Rights");
+INSERT INTO causes(cause) VALUES ("Education");
+INSERT INTO causes(cause) VALUES ("Human Rights");
+INSERT INTO causes(cause) VALUES ("Immigration");
+INSERT INTO causes(cause) VALUES ("Public Health");
+INSERT INTO causes(cause) VALUES ("Economic Equality");
+INSERT INTO causes(cause) VALUES ("Gun Violence");
+
