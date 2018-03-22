@@ -13,15 +13,14 @@ VALUES
     ("Rally for Rhinos", "Environment", "2016-2-1 11:56:00", "A rally to bring awareness for the struggles that rhinos face.", 1, "fakeimg2@fake.net", "Town Square", "82 Main Street", "Boulder", "CO", "80305", "1000-01-01 00:00:00", "1000-01-01 00:00:00");
 
 
-INSERT INTO causes(cause) VALUES ("Gender Equality");
-INSERT INTO causes(cause) VALUES ("LGBTQ Rights");
-INSERT INTO causes(cause) VALUES ("Environment");
-INSERT INTO causes(cause) VALUES ("Racial Equality");
-INSERT INTO causes(cause) VALUES ("Animal Rights");
-INSERT INTO causes(cause) VALUES ("Education");
-INSERT INTO causes(cause) VALUES ("Human Rights");
-INSERT INTO causes(cause) VALUES ("Immigration");
-INSERT INTO causes(cause) VALUES ("Public Health");
-INSERT INTO causes(cause) VALUES ("Economic Equality");
-INSERT INTO causes(cause) VALUES ("Gun Violence");
-
+INSERT INTO causes(name) VALUES ("Gender Equality");
+INSERT INTO causes(name) VALUES ("LGBTQ Rights");
+INSERT INTO causes(name) VALUES ("Environment");
+INSERT INTO causes(name) VALUES ("Racial Equality");
+INSERT INTO causes(name) VALUES ("Animal Rights");
+INSERT INTO causes(name) VALUES ("Education");
+INSERT INTO causes(name) VALUES ("Human Rights");
+INSERT INTO causes(name) VALUES ("Immigration");
+INSERT INTO causes(name) VALUES ("Public Health");
+INSERT INTO causes(name) VALUES ("Economic Equality");
+INSERT INTO causes(name) VALUES ("Gun Violence");

@@ -24,7 +24,7 @@ router.get("/events", function(req, res) {
 router.get("/events/:id", function(req, res) {
   db.Event.findOne({
     where: {
-      id: req.perams.id
+      id: req.params.id
     }
   }).then(function(event) {
     res.json(event);
@@ -35,7 +35,7 @@ router.get("/events/:id", function(req, res) {
 router.get("/events/causes/:cause", function(req, res) {
   db.Event.findAll({
     where: {
-      cause: req.perams.cause
+      cause: req.params.cause
     }
   }).then(function(events) {
     res.json(events);
