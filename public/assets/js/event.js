@@ -50,6 +50,11 @@ $(document).ready(function() {
       console.log(response);
       console.log(response.responseJSON.message);
 
+      if(response.responseJSON.message === "Token expired") {
+        localStorage.removeItem("token");
+      }
+
+      $(".modal-trigger").show();
       $("#error-msg").text("Please login before submitting your events");
       $("#modal1").modal("open");
 

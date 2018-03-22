@@ -11,6 +11,7 @@ router.get("/", function(req, res) {
     .then((events) => {
       res.render('index', {events: events});
     });
+  
     // res.sendFile(path.join(__dirname, "../public/assets/test.html"));
     //*UPDATE* with correct landing-page html
 });

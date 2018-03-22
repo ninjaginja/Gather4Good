@@ -120,6 +120,11 @@ $(document).ready(function() {
         console.log(typeof response);
         console.log(response);
         console.log(response.responseJSON.message);
+
+        if(response.responseJSON.message === "Token expired") {
+          localStorage.removeItem("token");
+        }
+
         console.log("No credentials homie. Might need to login. Show login and reg ish.")
         showLogin();
       });
