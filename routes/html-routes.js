@@ -11,10 +11,7 @@ router.get("/", function(req, res) {
     .then((events) => {
       res.render('index', {events: events});
     });
-<<<<<<< HEAD
-=======
-  
->>>>>>> c3bacd193e2aaaa7a36a63ac3a3d313f1ffba7a8
+
     // res.sendFile(path.join(__dirname, "../public/assets/test.html"));
     //*UPDATE* with correct landing-page html
 });
