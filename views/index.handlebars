@@ -155,6 +155,12 @@
     <!-- Header -->
     <h3 class="header" style="margin-left: 25px">Upcoming Events</h3>
 
+      <!-- Generate event cards via handlebars -->
+      {{#each events}}
+        {{>events/event-block}}
+      {{/each}}
+
+
       <!-- First Card -->
       <div class="row">
       <div class="card horizontal hoverable">
