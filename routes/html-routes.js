@@ -6,7 +6,9 @@ var path = require("path");
 
 //GET route to load the landing-page from the ROOT directory//
 router.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/assets/test.html")); //*UPDATE* with correct landing-page html
+    res.render('index');
+    // res.sendFile(path.join(__dirname, "../public/assets/test.html")); 
+    //*UPDATE* with correct landing-page html
 });
 
 //GET route to load the event-specific pages//
@@ -20,4 +22,7 @@ router.get("/create", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/assets/test2.html")); //*UPDATE* with correct create-event html
 });
 
+router.get("/test", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/assets/test3.html")); //*UPDATE* with correct create-event html
+});
 module.exports = router;
