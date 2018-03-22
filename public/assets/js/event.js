@@ -12,10 +12,13 @@ $(document).ready(function() {
 
     var newEvent = {
       title: $("#event_name").val().trim(),
-      cause: "Animal rights",
-      time: "2016-08-09 07:42:28",
+      CauseId: $("#cause_category").val(),
+      // cause: "Animal rights",
+      date: $("#event_date").val().trim(),
+      time: $("#event_time").val().trim(),
+      // time: "2016-08-09 07:42:28",
       description: $("#event_description").val().trim(),
-      img_url: "www.image.com",
+      img_url: $("#image_url").val().trim(),
       location_name: $("#location_name").val().trim(),
       location_street: $("#street").val().trim(),
       location_city: $("#city").val().trim(),
@@ -28,7 +31,7 @@ $(document).ready(function() {
     var newEventSettings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8080/api/events/create",
+        "url": "/api/events/create",
         "method": "POST",
         "headers": {
           "x-access-token": token,
