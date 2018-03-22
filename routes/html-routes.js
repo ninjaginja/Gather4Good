@@ -7,7 +7,10 @@ var db = require('../models')
 
 //GET route to load the landing-page from the ROOT directory//
 router.get("/", function(req, res) {
-    res.render('index');
+    db.Event.findAll()
+    .then((events) => {
+      res.render('index', {events: events});
+    });
     // res.sendFile(path.join(__dirname, "../public/assets/test.html"));
     //*UPDATE* with correct landing-page html
 });
