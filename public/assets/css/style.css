@@ -115,6 +115,11 @@ h6 {
   display: none;
 }
 
+#logout-head,
+#side-logout {
+  display: none;
+}
+
 #error-msg {
   color: red;
 }

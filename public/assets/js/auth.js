@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   determineAuthStatus();
   setSubmitBtnDefault();
-  var defaultSet = false;
+  $('.tabs').tabs();
 
   $("#submit-btn").on("click", function(event) {
     event.preventDefault();
@@ -113,7 +113,7 @@ $(document).ready(function() {
         if(response.message === "Authenticated") {
           hideLoginAndDismissModal();
         } else if (response.message === "Not authenticated") {
-          showLogin();
+          showLoginAndHideLogout();
         }
       })
       .fail(function(response) {
@@ -126,20 +126,21 @@ $(document).ready(function() {
         }
 
         console.log("No credentials homie. Might need to login. Show login and reg ish.")
-        showLogin();
+        showLoginAndHideLogout();
       });
   }
 
   function hideLoginAndDismissModal() {
     $(".modal-trigger").hide();
+    $("#logout-head, #side-logout").show();
     $("#modal1").modal("close");
     $("#first_name, #last_name, #reg-email, #reg-password").val("");
     $("#login-email, #login-password").val("");
   }
 
-  function showLogin() {
+  function showLoginAndHideLogout() {
     $(".modal-trigger").show();
-    //hide logout
+    $("#logout-head, #side-logout").hide();
   }
 
   function setUserExistsDisplay() {
@@ -156,23 +157,46 @@ $(document).ready(function() {
                 "#login-anchor-modal, #reg-anchor-modal";
 
   //Toggle error message display and set data attribute submit-btn to trigger
-  // correct functionality (login v. register)
+  //correct functionality (login v. register)
   $(anchors).on("click", function() {
     $("#error-msg").text("");
     console.log($(this).text());
 
-    if(!defaultSet) {
-      $("#submit-btn").data("submit-type", "Login");
-      console.log("submitbtn data", $("#submit-btn").data("submit-type"));
-      defaultSet = true;
-    } else {
-      $("#submit-btn").data("submit-type", $(this).text());
-      console.log("submitbtn data", $("#submit-btn").data("submit-type"));
-    }
+    $("#submit-btn").data("submit-type", $(this).text());
+    console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   });
 
+  //Dynamically toggles modal display to correct tab (login v. signup)
+  $("#login-anchor-head, #reg-anchor-head, #login-anchor-side, #reg-anchor-side").on("click", function() {
+
+    if($(this).text() == "Sign Up") {
+      setTimeout(function() {
+        $('ul.tabs').tabs('select_tab', "signup");
+      }, 300);
+    } else {
+      setTimeout(function() {
+        $('ul.tabs').tabs('select_tab', "login");
+      }, 300);
+    }
+
+  })
+
+  //Function called on page load to set the correct default btn submit-type
   function setSubmitBtnDefault() {
     $("#submit-btn").data("submit-type", "Login");
+    console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   }
+
+  //Logout functionality - destroy token in local storage
+  //and display sign/register options
+  $("#logout-head, #side-logout").on("click", function(event) {
+    event.preventDefault();
+
+    if(localStorage.getItem("token")) {
+      localStorage.removeItem("token");
+    }
+
+    showLoginAndHideLogout();
+  });
 
 });
