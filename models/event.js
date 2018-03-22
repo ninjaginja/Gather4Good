@@ -4,10 +4,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING(50),
             allowNull: false,
         },
-        cause: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
         date: {
             type: DataTypes.STRING,
             allowNull: false
@@ -45,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING(5),
             allowNull: false
         }
-    });   
+    });
 
     Event.associate = function(models) {
         Event.belongsTo(models.Cause, {
