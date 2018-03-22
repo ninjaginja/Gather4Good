@@ -23,6 +23,11 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Serve files from static directory
 app.use(express.static("public"));
 
+// Set Handlebars Engine
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 //*********   MOUNT ROUTES HERE   *********//
 app.use("/api", apiRoutes);
 app.use("/", htmlRoutes);
