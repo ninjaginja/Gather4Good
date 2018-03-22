@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
     var Cause = sequelize.define("Cause", {
-        cause: {
+        name: {
             type: DataTypes.STRING
         }
     },{
