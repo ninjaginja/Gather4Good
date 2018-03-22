@@ -8,7 +8,7 @@ var db = require('../models')
 //GET route to load the landing-page from the ROOT directory//
 router.get("/", function(req, res) {
     res.render('index');
-    // res.sendFile(path.join(__dirname, "../public/assets/test.html")); 
+    // res.sendFile(path.join(__dirname, "../public/assets/test.html"));
     //*UPDATE* with correct landing-page html
 });
 
@@ -26,7 +26,7 @@ router.get("/create", function(req, res) {
         res.render('create', {causes: causes});
     });
     // res.sendFile(path.join(__dirname, "../public/assets/test2.html")); //*UPDATE* with correct create-event html
-    
+
 });
 
 router.get("/test", function(req, res) {
