@@ -19,7 +19,8 @@ router.get("/event/:id", function(req, res) {
 
 //GET route to load the create-event page (no handlebars needed)//
 router.get("/create", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/assets/test2.html")); //*UPDATE* with correct create-event html
+    // res.sendFile(path.join(__dirname, "../public/assets/test2.html")); //*UPDATE* with correct create-event html
+    res.render('create');
 });
 
 router.get("/test", function(req, res) {
