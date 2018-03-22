@@ -8,8 +8,12 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: false
         },
+        date: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         time: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
         },
         description: {
@@ -19,10 +23,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
         img_url: {
-            type: DataTypes.STRING,
-            validate: {
-                isUrl: true
-            }
+            type: DataTypes.STRING
         },
         location_name: {
             type: DataTypes.STRING
@@ -44,7 +45,15 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING(5),
             allowNull: false
         }
-    });
+    });   
+
+    Event.associate = function(models) {
+        Event.belongsTo(models.Cause, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
 
     return Event;
 }

@@ -11,3 +11,6 @@ INSERT INTO events
     (title, cause, time, description, organizer_id, img_url, location_name, location_street, location_city, location_state, location_zip, createdAt, updatedAt)
 VALUES
     ("Rally for Rhinos", "Environment", "2016-2-1 11:56:00", "A rally to bring awareness for the struggles that rhinos face.", 1, "fakeimg2@fake.net", "Town Square", "82 Main Street", "Boulder", "CO", "80305", "1000-01-01 00:00:00", "1000-01-01 00:00:00");
+
+
+INSERT INTO causes(cause) VALUES ("Gender Equality");
