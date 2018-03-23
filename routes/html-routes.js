@@ -9,7 +9,7 @@ var db = require('../models')
 router.get("/", function(req, res) {
     db.Event.findAll({ include: [db.Cause]})
     .then((events) => {
-      res.render('index', {events: events});
+      return res.render('index', {events: events});
     });
 });
 
@@ -36,5 +36,24 @@ router.get("/create", function(req, res) {
         res.render('create', {causes: causes});
     });
 });
+
+router.get("/causes", function(req, res) {
+
+  db.Event.findAll({
+    where: {
+      CauseId: req.query.cause_id
+    },
+    include: [db.Cause]
+  })
+  .then((events) => {
+    console.log(JSON.stringify(events));
+    if(events.length == 0) {
+      res.redirect("/");
+    } else {
+      return res.render('index', {events: events});
+    }
+  });
+
+})
 
 module.exports = router;
