@@ -11,29 +11,27 @@ router.get("/", function(req, res) {
     .then((events) => {
       res.render('index', {events: events});
     });
-
-    // res.sendFile(path.join(__dirname, "../public/assets/test.html"));
-    //*UPDATE* with correct landing-page html
 });
 
 //GET route to load the event-specific pages//
 router.get("/event/:id", function(req, res) {
-    /*Here we will load the "event page" (html), and using handlebars on the front end fetch the specific event
-    data from the DATABASE and send it back*/
+    /*Here we receive the request to load a single event page, run a query to get the data from the
+    database, load the view with handlebars, and respond with the html*/
+    db.Event.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then((event) => {
+        res.render(/*handlebars stuff for rendering single-event page*/);
+    })
 });
 
-//GET route to load the create-event page (no handlebars needed)//
+//GET route to load the create-event page//
 router.get("/create", function(req, res) {
     db.Cause.findAll()
     .then((causes) => {
         console.log(causes)
         res.render('create', {causes: causes});
     });
-    // res.sendFile(path.join(__dirname, "../public/assets/test2.html")); //*UPDATE* with correct create-event html
-
 });
-
-router.get("/test", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/assets/test3.html")); //*UPDATE* with correct create-event html
-});
-module.exports = router;
