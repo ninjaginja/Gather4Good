@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var path = require("path");
-var db = require('../models')
+var db = require('../models');
 
 //INSERT other HTML Routes Here - Attach to "router" instance to export//
 
@@ -15,17 +15,16 @@ router.get("/", function(req, res) {
 
 //GET route to load the event-specific pages//
 router.get("/event/:id", function(req, res) {
-    /*Here we receive the request to load a single event page, run a query to get the data from the
-    database, load the view with handlebars, and respond with the html*/
     db.Event.findOne({
         where: {
-            id: req.params.id
+          id: req.params.id
         }
-    })
-    .then((newEvent) => {
-        console.log(newEvent);
-        //res.render(/*handlebars stuff for rendering single-event page*/);
-    })
+    }).then((events) =>{
+        res.render('event', {events: events})
+        
+    });
+    /*Here we will load the "event page" (html), and using handlebars on the front end fetch the specific event
+    data from the DATABASE and send it back*/
 });
 
 //GET route to load the create-event page//
@@ -36,6 +35,7 @@ router.get("/create", function(req, res) {
         res.render('create', {causes: causes});
     });
 });
+
 
 router.get("/causes", function(req, res) {
 
