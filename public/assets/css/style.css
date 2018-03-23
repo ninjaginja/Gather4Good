@@ -81,7 +81,6 @@ h6 {
 
 .image-container {
     position: relative;
-    /* Remove the parts of the circle that is outside of the image */
     overflow:hidden;
 }
 .image-container:after {
@@ -91,7 +90,7 @@ h6 {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 25%;
+    height: 30%;
     background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.8));
     z-index: 0;
 } 
@@ -109,6 +108,10 @@ h6 {
     color:white
 
 }
+
+#title{
+ font-size: 38px
+} 
 
 /* GREG CSS BEGIN */
 .modal-trigger {
@@ -137,6 +140,13 @@ h6 {
     }
     
 }
+
+@media only screen and (max-width: 620px) { 
+    .card-title {
+       margin-left:0px
+    }
+    
+}
 @media only screen and (max-width: 600px) {
 
     nav .brand-logo {
@@ -146,9 +156,16 @@ h6 {
         width: 75vw;
         margin-left: 12vw
     }
+    .event-card {
+        width: 90vw;
+        margin-left: 10px
+    }
 }
 
 @media only screen and (max-width: 500px) {
+    #title{
+        font-size:7vw
+    }
 
     nav .brand-logo {
         left: 20%;
@@ -157,6 +174,7 @@ h6 {
         width: 100vw;
         margin-left: 0
     }
+
 }
 @media only screen and (max-width: 400px) {
 

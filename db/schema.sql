@@ -1,4 +1,7 @@
 DROP DATABASE IF EXISTS causes_db;
 CREATE DATABASE causes_db;
 
-SELECT * from causes;
+USE causes_db;
+
+-- SELECT * from causes;
+
