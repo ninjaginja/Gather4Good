@@ -6,43 +6,6 @@ var router = express.Router();
 
 //INSERT other API Routes Here - Attach to "router" instance to export//
 
-//**** ROUTES FOR HANDLING EVENTS ****//
-//=========================================//
-
-//CREATES A NEW EVENT **PROTECTED**
-
-//JOINS AN EVENT **PROTECTED**
-
-//GETS ALL EVENTS
-router.get("/events", function(req, res) {
-  db.Event.findAll({}).then(function(events) {
-    res.json(events)
-  });
-});
-
-//GETS ONE EVENT
-router.get("/events/:id", function(req, res) {
-  db.Event.findOne({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(event) {
-    res.json(event);
-  });
-});
-
-//GETS EVENTS BY CAUSE
-router.get("/events/causes/:cause", function(req, res) {
-  db.Event.findAll({
-    where: {
-      cause: req.params.cause
-    }
-  }).then(function(events) {
-    res.json(events);
-  });
-});
-
-
 //**** ROUTES FOR LOGIN AND REGISTRATION ****//
 //=========================================//
 
@@ -74,7 +37,6 @@ router.post('/register', function (req, res) {
       }
     });
   });
-
 
 //LOGS-IN AN EXISTING USER
 router.post('/login', function (req, res) {

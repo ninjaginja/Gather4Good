@@ -11,13 +11,14 @@
         <li><a href="/create">Organize An Event</a></li>
         <li><a id="login-anchor-head" href="#modal1" class="modal-trigger">Login</a></li>
         <li><a id="reg-anchor-head" href="#modal1" class="modal-trigger">Sign Up</a></li>
+        <li><a id="logout-head" class="logout">Logout</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href=""><i class="material-icons right" style="margin-right:-10px">clear</i></a></li>
         <li><a href="">Organize An Event</a></li>
         <li><a id="login-anchor-side" href="#modal1" class="modal-trigger">Login</a></li>
         <li><a id="reg-anchor-side" href="#modal1" class="modal-trigger">Sign Up</a></li>
-        <li><a id="reg-anchor-side" href="#" class="modal-trigger">Logout</a></li>
+        <li><a id="side-logout" class="logout">Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -50,7 +51,7 @@
         <!-- Login Tab -->
         <li class="tab col s3"><a id="login-anchor-modal" href="#login">Login</a></li>
         <!-- Sign Up Tab -->
-        <li class="tab col s3"><a id="reg-anchor-modal" href="#signup">Sign Up</a></li>
+        <li id="reg-tab" class="tab col s3"><a id="reg-anchor-modal" href="#signup">Sign Up</a></li>
         <!-- Close Icon -->
         <li class="right modal-close"><i class="material-icons valign-center">clear</i></li>
       </ul>
@@ -135,18 +136,19 @@
 
 <main>
   <!-- Cause Buttons -->
-  <div class="center-align causes" style="margin-top: 20px; padding-bottom: 20px">
-    <a class="waves-effect waves-light btn">Gender Equality</a>
-    <a class="waves-effect waves-light btn">LGBTQ Rights</a>
-    <a class="waves-effect waves-light btn">Environment</a>
-    <a class="waves-effect waves-light btn">Racial Equality</a>
-    <a class="waves-effect waves-light btn">Animal Rights</a>
-    <a class="waves-effect waves-light btn">Education</a>
-    <a class="waves-effect waves-light btn">Human Rights</a>
-    <a class="waves-effect waves-light btn">Immigration</a>
-    <a class="waves-effect waves-light btn">Public Health</a>
-    <a class="waves-effect waves-light btn">Economic Equality</a>
-    <a class="waves-effect waves-light btn">Gun Violence</a>
+  <div class="btn-container center-align causes" style="margin-top: 20px; padding-bottom: 20px">
+    <a data-cause-id="1" class="waves-effect waves-light btn causeBtn">Gender Equality</a>
+    <a data-cause-id="2" class="waves-effect waves-light btn causeBtn">LGBTQ Rights</a>
+    <a data-cause-id="3" class="waves-effect waves-light btn causeBtn">Environment</a>
+    <a data-cause-id="4" class="waves-effect waves-light btn causeBtn">Racial Equality</a>
+    <a data-cause-id="5" class="waves-effect waves-light btn causeBtn">Animal Rights</a>
+    <a data-cause-id="6" class="waves-effect waves-light btn causeBtn">Education</a>
+    <a data-cause-id="7" class="waves-effect waves-light btn causeBtn">Human Rights</a>
+    <a data-cause-id="8" class="waves-effect waves-light btn causeBtn">Immigration</a>
+    <a data-cause-id="9" class="waves-effect waves-light btn causeBtn">Public Health</a>
+    <a data-cause-id="10" class="waves-effect waves-light btn causeBtn">Economic Equality</a>
+    <a data-cause-id="11" class="waves-effect waves-light btn causeBtn">Gun Violence</a>
+    <a data-cause-id="All" class="waves-effect waves-light btn causeBtn">All Causes</a>
   </div>
 
   <!-- Events Div -->
@@ -154,6 +156,12 @@
     <div class="col s12 m7" style="margin-left:10vw; margin-right:10vw">
     <!-- Header -->
     <h3 class="header" style="margin-left: 25px">Upcoming Events</h3>
+
+      <!-- Generate event cards via handlebars -->
+      {{#each events}}
+        {{>events/event-block}}
+      {{/each}}
+
 
       <!-- First Card -->
       <div class="row">
