@@ -17,8 +17,7 @@ router.get("/event/:id", function(req, res) {
     db.Event.findOne({
         where: {
           id: req.params.id
-        },
-        include: [db.Cause]
+        }
     }).then((events) =>{
         res.render('event', {events: events})
         

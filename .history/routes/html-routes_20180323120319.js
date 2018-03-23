@@ -18,7 +18,7 @@ router.get("/event/:id", function(req, res) {
         where: {
           id: req.params.id
         },
-        include: [db.Cause]
+        include: db.Cause
     }).then((events) =>{
         res.render('event', {events: events})
         
