@@ -1,0 +1,160 @@
+<header>
+  <!-- NavBar -->
+  <nav style="height: 70px">
+    <div class="nav-wrapper">
+      <!-- Logo Image -->
+      <a href="/" class="brand-logo"><img src="/assets/images/gather-box-logo-small.png"></a>
+
+      <!--  -->
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <!-- <li><a href="">Organize An Event</a></li> -->
+        <li><a id="login-anchor-head" href="#modal1" class="modal-trigger">Login</a></li>
+        <li><a id="reg-anchor-head" href="#modal1" class="modal-trigger">Sign Up</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href=""><i class="material-icons right" style="margin-right:-10px">clear</i></a></li>
+        <!-- <li><a href="">Organize An Event</a></li> -->
+        <li><a id="login-anchor-side" href="#modal1" class="modal-trigger">Login</a></li>
+        <li><a id="reg-anchor-side" href="#modal1" class="modal-trigger">Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+</header>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+
+    <!-- Modal Tabs -->
+    <div class="col s12">
+      <ul class="tabs">
+        <!-- Login Tab -->
+        <li class="tab col s3"><a id="login-anchor-modal" href="#login">Login</a></li>
+        <!-- Sign Up Tab -->
+        <li class="tab col s3"><a id="reg-anchor-modal" href="#signup">Sign Up</a></li>
+        <!-- Close Icon -->
+        <li class="right modal-close"><i class="material-icons valign-center">clear</i></li>
+      </ul>
+    </div>
+
+    <!-- Login Tab -->
+    <div id="login" class="col s12">
+      <!-- Section Header -->
+      <h4 style="padding-top: 20px;">Enter Your Info</h4>
+
+      <!--  Login Form-->
+      <div class="row">
+        <form class="col s12">
+          <!-- Email -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="login-email" type="email" class="validate">
+              <label for="login-email">Email</label>
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="login-password" type="password" class="validate">
+              <label for="login-password">Password</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+
+      <!-- Sign Up Tab -->
+      <div id="signup" class="col s12" style="margin-left:11px">
+        <!-- Section Header -->
+        <h4>Enter Your Info</h4>
+
+        <!-- Sign Up Form -->
+        <div class="row">
+          <form class="col s12">
+            <!-- First Row -->
+            <div class="row">
+              <!-- First Name -->
+              <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+              </div>
+
+              <!-- Last Name -->
+              <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+            <!-- Second Row -->
+            <div class="row">
+              <!-- Email -->
+              <div class="input-field col s12">
+                <input id="reg-email" type="email" class="validate">
+                <label for="reg-email">Email</label>
+              </div>
+            </div>
+            <!-- Third Row -->
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="reg-password" type="password" class="validate">
+                <label for="reg-password">Password</label>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Error Display -->
+    <div id="error-msg"></div>
+
+    <!-- Submit Button -->
+    <button id="submit-btn" style="margin-bottom:15px" class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
+  </div>
+</div>
+
+<main>
+
+<!-- Event Div -->
+<div class="row">
+  <div class="col s12 m7">
+    <div class="card event-card">
+     {{!-- Event Image  --}}
+      <div class="card-image image-container">
+        <img src="/assets/images/wall-graffiti.jpg">
+        {{!-- Event Title --}}
+        <span class="card-title" id="title" style="z-index: 2">{{events.title}}</span>
+      </div>
+      <div class="card-content">
+        {{!-- Cause Tag --}}
+        <div class="chip right" style="margin-bottom: 40px; margin-left: 100px">{{events.Cause.name}}</div>
+        <!-- Date and Time -->
+        <h5 id='date'>Date: {{events.date}}</h5>
+        <h5 id='time'>Time: {{events.time}}</h5>
+        {{!-- Event Description --}}
+        <p>{{events.description}}</p>
+        <h6 class="right-align">Location: <br><span class="address">{{events.location_name}} <br>{{events.location_street}}, {{events.location_city}}, {{events.location_state}} {{events.location_zip}}</span></h6>
+            </div>
+            <div class="card-action">
+              <a href="#">Join Event</a>
+            </div>
+          </div>
+        </div>
+      </div>
+            
+
+
+<!-- Footer -->
+<footer class="page-footer" style="background-color:#43b5b1">
+  <div class="footer-copyright" >
+    <!-- Copyright -->
+    <div class="container" style="font-family: 'Rubik', sans-serif;">
+    © 2018 The A Team
+    <!-- Repo Link -->
+    <a class="grey-text text-lighten-4 right" href="#!" style="font-family: 'Rubik', sans-serif;">GitHub Repo</a>
+    </div>
+  </div>
+</footer>
