@@ -9,7 +9,14 @@ var db = require('../models');
 router.get("/", function(req, res) {
     db.Event.findAll({ include: [db.Cause]})
     .then((events) => {
-      return res.render('index', {events: events});
+      db.Cause.findAll()
+      .then((causes) => {
+        var data = {
+          events: events,
+          causes: causes
+        }
+        res.render('index', data)
+      });
     });
 });
 
@@ -21,7 +28,7 @@ router.get("/event/:id", function(req, res) {
         }
     }).then((events) =>{
         res.render('event', {events: events})
-        
+
     });
     /*Here we will load the "event page" (html), and using handlebars on the front end fetch the specific event
     data from the DATABASE and send it back*/
