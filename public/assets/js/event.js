@@ -13,7 +13,6 @@ $(document).ready(function() {
     var newEvent = {
       title: $("#event_name").val().trim(),
       CauseId: $("#cause_category").val(),
-      // cause: "Animal rights",
       date: $("#event_date").val().trim(),
       time: $("#event_time").val().trim(),
       // time: "2016-08-09 07:42:28",
@@ -59,6 +58,7 @@ $(document).ready(function() {
       $("#modal1").modal("open");
 
     });
-
   });
+
+
 });
