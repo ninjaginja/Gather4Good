@@ -125,9 +125,8 @@
       <div class="card-image image-container">
         {{!-- Event Image  --}}
         {{#if events.img_url}}
-        <img id="event-image" src={{events.img_url}}>
-        {{!-- {{/if}} --}}
-        {{else}}
+
+        {{#else}}
         <img id="event-image" src="/assets/images/wall-graffiti.jpg">
         {{/if}}
         {{!-- Event Title --}}
@@ -149,10 +148,7 @@
         <h6 class="right-align" style="font-size: 20px;padding-top: 15px"><span style="font-weight:bold;font-size: 26px; color:#308280">Location:</span><br>
         <span class="address">
         {{!-- Location Name --}}
-        {{#if events.location_name}} 
-        {{events.location_name}}
-        <br>
-        {{/if}}
+        {{events.location_name}} <br>
         {{!-- Street Address --}}
         {{events.location_street}}, 
         {{!-- City --}}

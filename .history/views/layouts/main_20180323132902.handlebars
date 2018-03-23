@@ -29,11 +29,14 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-
-
 <!-- Front-End Javascript -->
 <script>
 $(document).ready(function(){
+  if ({{events.img_url}} === null){
+    $('#event-image').attr('srcr', '/assets/images/wall-graffiti.jpg')
+  } else {
+    $('#event-image').attr('src', {{img_url}})
+  }
   
   // Character Counter
   $('input#input_text, textarea#event_desription').characterCounter();

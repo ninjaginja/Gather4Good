@@ -9,11 +9,7 @@
     <!-- Description -->
     <p>{{description}}</p>
     <!-- Address -->
-    <h6 class="right-align">Location: <br><span class="address">
-      {{#if location_name}} 
-      {{location_name}} <br>
-      {{/if}}
-      {{location_street}}, {{location_city}}, {{location_state}} {{location_zip}}</span></h6>
+    <h6 class="right-align">Location: <br><span class="address">{{location_name}} <br> {{location_street}}, {{location_city}}, {{location_state}} {{location_zip}}</span></h6>
   </div>
   <div class="card-action">
     <a href="/event/{{id}}">More Info</a>

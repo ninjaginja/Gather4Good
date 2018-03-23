@@ -7,7 +7,8 @@ var db = require('../models');
 
 //GET route to load the landing-page from the ROOT directory//
 router.get("/", function(req, res) {
-    db.Event.findAll({ include: [db.Cause]})
+    db.Event.findAll()
+    db.Cause.findAll()
     .then((events) => {
       return res.render('index', {events: events});
     });

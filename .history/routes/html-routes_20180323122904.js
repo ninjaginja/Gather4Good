@@ -15,8 +15,6 @@ router.get("/", function(req, res) {
 
 //GET route to load the event-specific pages//
 router.get("/event/:id", function(req, res) {
-    /*Here we will load the "event page" (html), and using handlebars on the front end fetch the specific event
-    data from the DATABASE and send it back*/
     db.Event.findOne({
         where: {
           id: req.params.id
@@ -26,7 +24,8 @@ router.get("/event/:id", function(req, res) {
         res.render('event', {events: events})
         
     });
-
+    /*Here we will load the "event page" (html), and using handlebars on the front end fetch the specific event
+    data from the DATABASE and send it back*/
 });
 
 //GET route to load the create-event page//
