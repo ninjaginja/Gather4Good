@@ -42,7 +42,7 @@ $(document).ready(function() {
     }
 
   $.ajax(newEventSettings)
-    .done(function (response) {
+    .done(function(response) {
       console.log(response);
     })
     .fail(function(response) {
