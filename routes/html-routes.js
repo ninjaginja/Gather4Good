@@ -37,14 +37,4 @@ router.get("/create", function(req, res) {
     
 });
 
-// router.get("/test/:id", function(req, res) {
-//     db.Event.findOne({
-//         where: {
-//           id: req.params.id
-//         }
-//     }).then((events) =>{
-//         res.render('event', {events: events})
-        
-//     }); //*UPDATE* with correct create-event html
-// });
 module.exports = router;
