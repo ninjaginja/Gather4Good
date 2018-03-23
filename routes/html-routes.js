@@ -22,8 +22,9 @@ router.get("/event/:id", function(req, res) {
             id: req.params.id
         }
     })
-    .then((event) => {
-        res.render(/*handlebars stuff for rendering single-event page*/);
+    .then((newEvent) => {
+        console.log(newEvent);
+        //res.render(/*handlebars stuff for rendering single-event page*/);
     })
 });
 
@@ -35,3 +36,5 @@ router.get("/create", function(req, res) {
         res.render('create', {causes: causes});
     });
 });
+
+module.exports = router;
