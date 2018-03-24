@@ -3,8 +3,6 @@ var router = express.Router();
 var path = require("path");
 var db = require('../models');
 
-//INSERT other HTML Routes Here - Attach to "router" instance to export//
-
 //GET route to load the landing-page from the ROOT directory//
 router.get("/", function(req, res) {
   Promise.all([
@@ -28,7 +26,6 @@ router.get("/", function(req, res) {
   });
 });
 
-
 //GET route to load the event-specific pages//
 router.get("/event/:id", function(req, res) {
     /*Here we will load the "event page" (html), and using handlebars on the front end fetch the specific event
@@ -46,10 +43,7 @@ router.get("/event/:id", function(req, res) {
         }
       })
     ])
-    .then(function(data) {
-      // console.log("....data.....");
-      // console.log(data[0].organizer_id);
-      // console.log("....data.....");      
+    .then(function(data) {     
       var events = data[0];
       var attendees = data[1].length;
       var organizerId = data[0].organizer_id;
@@ -86,18 +80,11 @@ router.get("/causes", function(req, res) {
     db.Cause.findAll()])
       .then((data) => {
         console.log(JSON.stringify(data));
-
-        // if(data[0].length == 0) {
-        //   res.redirect("/");
-        // } else {
-
           var dataToRender = {
               events: data[0],
               causes: data[1]
             }
-
           return res.render('index', dataToRender);
-        // }
     });
 });
 
