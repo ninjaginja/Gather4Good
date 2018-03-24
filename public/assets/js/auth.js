@@ -122,7 +122,7 @@ $(document).ready(function() {
 
     $.ajax(ajaxSettings)
       .done(function (response) {
-        console.log(response);
+        // console.log(response);
         if(response.message === "Authenticated") {
           hideLoginAndDismissModal();
         } else if (response.message === "Not authenticated") {
@@ -197,7 +197,7 @@ $(document).ready(function() {
   //Function called on page load to set the correct default btn submit-type
   function setSubmitBtnDefault() {
     $("#submit-btn").data("submit-type", "Login");
-    console.log("submit-btn data", $("#submit-btn").data("submit-type"));
+    // console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   }
 
   //Logout functionality - destroy token in local storage

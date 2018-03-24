@@ -15,9 +15,9 @@ router.get("/", function(req, res) {
     db.Cause.findAll()
   ])
   .then(function(data) {
-    console.log("......");
-    console.log(data[0]);
-    console.log("......");    
+    // console.log("......");
+    // console.log(data[0]);
+    // console.log("......");
     var data = {
       events: data[0],
       causes: data[1]
@@ -43,7 +43,7 @@ router.get("/event/:id", function(req, res) {
         }
       })
     ])
-    .then(function(data) {     
+    .then(function(data) {
       var events = data[0];
       var attendees = data[1].length;
       var organizerId = data[0].organizer_id;
@@ -53,7 +53,7 @@ router.get("/event/:id", function(req, res) {
         }
       }).then(function(user) {
       var organizer = user.name;
-      res.render('event', { events: events, attendees: attendees, organizer: organizer })        
+      res.render('event', { events: events, attendees: attendees, organizer: organizer })
       });
     });
 });
@@ -62,7 +62,7 @@ router.get("/event/:id", function(req, res) {
 router.get("/create", function(req, res) {
     db.Cause.findAll()
     .then((causes) => {
-        console.log(causes)
+        // console.log(causes)
         res.render('create', {causes: causes});
     });
 });
@@ -79,7 +79,7 @@ router.get("/causes", function(req, res) {
     }),
     db.Cause.findAll()])
       .then((data) => {
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
           var dataToRender = {
               events: data[0],
               causes: data[1]
