@@ -29,7 +29,7 @@ body {
 }
 
 main {
-    flex: 1 1 auto;
+    flex: 1 0 auto;
 }
 
 .location {
@@ -45,7 +45,7 @@ h6 {
 }
 .handlebars-events {
     width: 75vw;
-    margin-left:11vw;
+    /* margin-left:11vw;  */
     margin-right:10vw
 }
 
@@ -71,7 +71,7 @@ h6 {
 }
 
 .row .col.s12 {
-    width: 100%;
+    width: 90%;
 }
 
 .collapsible-header{
@@ -129,7 +129,7 @@ h6 {
 }
 
 #incomplete-form-msg {
-  color: red;
+  color: red; 
   display: none;
 }
 /* GREG CSS END */
@@ -157,14 +157,14 @@ h6 {
     .handlebars-events {
         width: 90vw;
         /* margin: 20px; */
-        margin-left:3.5vw;
+        margin-left:3.5vw; 
         margin-right:0
     }
 
 }
 
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 620px) { 
     .card-title {
        margin-left:0px
     }
@@ -189,7 +189,7 @@ h6 {
     .handlebars-events {
         width: 90vw;
         /* margin: 20px; */
-        margin-left:3vw;
+        margin-left:3vw; 
         margin-right:0
     }
     #title{
@@ -216,7 +216,7 @@ h6 {
     .handlebars-events {
         width: 95vw;
         /* margin: 20px; */
-        margin-left:0;
+        margin-left:0; 
         margin-right:0
     }
 }

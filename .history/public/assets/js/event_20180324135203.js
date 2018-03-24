@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  // console.log(localStorage.getItem("token"));
+  console.log(localStorage.getItem("token"));
 
   // Retrieve data from form to create new event object
   // To be called on click of form submit btn
@@ -58,8 +58,8 @@ $(document).ready(function() {
     var token = localStorage.getItem("token");
     var newEvent = retrieveEventData();
 
-    // console.log(token);
-    // console.log(newEvent);
+    console.log(token);
+    console.log(newEvent);
 
     var newEventSettings = {
         "async": true,
@@ -156,7 +156,7 @@ $(document).ready(function() {
     }
     joinEvent(Settings);
   });
-
+  
 
   //post request to join event with authentication handling.
   function joinEvent(Settings) {
@@ -166,6 +166,7 @@ $(document).ready(function() {
           Materialize.toast('You are already going to this event!', 4000);
         } else {
           Materialize.toast("You're making a difference, see you there!", 4000)
+          // alert("You're making a difference, see you there!");
           setTimeout(function(){
             window.location.reload();
           }, 5000)
