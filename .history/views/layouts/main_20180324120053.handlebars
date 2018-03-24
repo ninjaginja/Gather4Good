@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>Gather4Good</title>
+
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Rubik" rel="stylesheet">
+
+  <!-- Style CSS -->
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+  
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+
+<!-- Compiled and minified JavaScript (Materialize) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+{{!-- Client Side Javascript --}}
+<script type="text/javascript" src="/assets/js/client.js" ></script>
+{{!-- Authentication Javascript --}}
+<script type="text/javascript" src="/assets/js/auth.js" ></script>
+{{!-- Event Creation Javascript --}}
+<script type="text/javascript" src="/assets/js/event.js"></script>
+
+
+</head>
+	<body>
+
+{{!-- Header HTML--}}
+<header>
+  <!-- NavBar -->
+  <nav style="height: 70px">
+      <div class="nav-wrapper">
+        <!-- Logo Image -->
+        <a href="/" class="brand-logo"><img src="/assets/images/gather-box-logo-small.png"></a>
+
+      <!-- Navbar Links -->
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/create">Organize An Event</a></li>
+        <li><a id="login-anchor-head" href="#modal1" class="modal-trigger">Login</a></li>
+        <li><a id="reg-anchor-head" href="#modal1" class="modal-trigger">Sign Up</a></li>
+        <li><a id="logout-head" class="logout">Logout</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href=""><i class="material-icons right" style="margin-right:-10px">clear</i></a></li>
+        <li><a href="">Organize An Event</a></li>
+        <li><a id="login-anchor-side" href="#modal1" class="modal-trigger">Login</a></li>
+        <li><a id="reg-anchor-side" href="#modal1" class="modal-trigger">Sign Up</a></li>
+        <li><a id="side-logout" class="logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Image Gallery -->
+  <div class="slider">
+    <ul class="slides">
+      <!-- First Image -->
+      <li><img class="responsive-img" src="/assets/images/science_color.jpg"></li>
+      <!-- Second Image -->
+      <li><img class="responsive-img" src="/assets/images/protest-header_signs.jpg"></li>
+      <!-- Third Image -->
+      <li><img class="responsive-img" src="/assets/images/women.jpg"></li>
+      <!-- Fourth Image -->
+      <li><img class="responsive-img" src="/assets/images/immigrants.jpg"></li>
+      <!-- Fifth Image -->
+      <li><img class="responsive-img" src="/assets/images/fullpride.jpg"></li>
+    </ul>
+  </div>
+
+
+  <!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+
+    <!-- Modal Tabs -->
+    <div class="col s12">
+      <ul class="tabs">
+        <!-- Login Tab -->
+        <li class="tab col s3"><a id="login-anchor-modal" href="#login">Login</a></li>
+        <!-- Sign Up Tab -->
+        <li id="reg-tab" class="tab col s3"><a id="reg-anchor-modal" href="#signup">Sign Up</a></li>
+        <!-- Close Icon -->
+        <li class="right modal-close"><i class="material-icons valign-center">clear</i></li>
+      </ul>
+    </div>
+
+    <!-- Login Tab -->
+    <div id="login" class="col s12">
+      <!-- Section Header -->
+      <h4 style="padding-top: 20px;">Enter Your Info</h4>
+
+      <!--  Login Form-->
+      <div class="row">
+        <form class="col s12">
+          <!-- Email -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="login-email" type="email" class="validate">
+              <label for="login-email">Email</label>
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="login-password" type="password" class="validate">
+              <label for="login-password">Password</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+
+      <!-- Sign Up Tab -->
+      <div id="signup" class="col s12" style="margin-left:11px">
+        <!-- Section Header -->
+        <h4>Enter Your Info</h4>
+
+        <!-- Sign Up Form -->
+        <div class="row">
+          <form class="col s12">
+            <!-- First Row -->
+            <div class="row">
+              <!-- First Name -->
+              <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+              </div>
+
+              <!-- Last Name -->
+              <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+            <!-- Second Row -->
+            <div class="row">
+              <!-- Email -->
+              <div class="input-field col s12">
+                <input id="reg-email" type="email" class="validate">
+                <label for="reg-email">Email</label>
+              </div>
+            </div>
+            <!-- Third Row -->
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="reg-password" type="password" class="validate">
+                <label for="reg-password">Password</label>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Error Display -->
+    <div id="error-msg"></div>
+
+    <!-- Submit Button -->
+    <button id="submit-btn" style="margin-bottom:24px" class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
+  </div>
+</div>
+</header>
+
+		{{{ body }}}
+
+  <!-- Footer -->
+  <footer class="page-footer" style="background-color:#43b5b1">
+    <div class="footer-copyright" >
+      <!-- Copyright -->
+      <div class="container" style="font-family: 'Rubik', sans-serif;">
+      © 2018 The A Team
+      <!-- Repo Link -->
+      <a class="grey-text text-lighten-4 right" href="https://github.com/ninjaginja/Gather4Good" style="font-family: 'Rubik', sans-serif;">GitHub Repo</a>
+      </div>
+    </div>
+  </footer>
+	</body>
+</html>

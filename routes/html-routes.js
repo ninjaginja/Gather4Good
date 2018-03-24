@@ -76,9 +76,9 @@ router.get("/causes", function(req, res) {
       .then((data) => {
         console.log(JSON.stringify(data));
 
-        if(data[0].length == 0) {
-          res.redirect("/");
-        } else {
+        // if(data[0].length == 0) {
+        //   res.redirect("/");
+        // } else {
 
           var dataToRender = {
               events: data[0],
@@ -86,7 +86,7 @@ router.get("/causes", function(req, res) {
             }
 
           return res.render('index', dataToRender);
-        }
+        // }
     });
 });
 

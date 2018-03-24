@@ -15,7 +15,7 @@ $(document).ready(function() {
           location_name: $("#location_name").val().trim(),
           location_street: $("#street").val().trim(),
           location_city: $("#city").val().trim(),
-          location_state: $("#state").val().trim(),
+          location_state: $("#state").val(),
           location_zip: $("#zipcode").val().trim()
         }
 
@@ -156,17 +156,23 @@ $(document).ready(function() {
     }
     joinEvent(Settings);
   });
+  
 
   //post request to join event with authentication handling.
   function joinEvent(Settings) {
     $.ajax(Settings)
       .done(function (response) {
         if(!response) {
-          alert("You are already going to this event!");
-          window.location.href = "/";
+          Materialize.toast('You are already going to this event!', 4000);
+          setTimeout(function(){
+            window.location.reload();
+          }, 5000)
         } else {
-          alert("You're making a difference, see you there!");
-          window.location.href = "/";
+          Materialize.toast("You're making a difference, see you there!", 4000)
+          // alert("You're making a difference, see you there!");
+          setTimeout(function(){
+            window.location.reload();
+          }, 5000)
         }
       })
       .fail(function (response) {
