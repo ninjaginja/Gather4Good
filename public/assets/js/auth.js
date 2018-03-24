@@ -30,6 +30,7 @@ $(document).ready(function() {
     }
 
     console.log(newUser);
+    //call validation fxn here - if true, execute rest of code
 
     $.ajax({
       method: "POST",
@@ -63,6 +64,7 @@ $(document).ready(function() {
     }
 
     console.log(credentials);
+    //call validation fxn here - if true, execute rest of code
 
     $.ajax({
       method: "POST",
@@ -198,5 +200,20 @@ $(document).ready(function() {
 
     showLoginAndHideLogout();
   });
+
+
+  function validateUserAuthInput() {
+    var validated = true;
+    var propertyArr = Object.keys(eventObj);
+    console.log("property array:" + propertyArr);
+
+    propertyArr.forEach(function(property) {
+      if(!eventObj[property] || eventObj[property] == " ") {
+        validated = false;
+      }
+    });
+    return validated;
+  }
+
 
 });

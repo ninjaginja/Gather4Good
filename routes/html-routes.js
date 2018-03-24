@@ -39,7 +39,7 @@ router.get("/event/:id", function(req, res) {
     ])
     .then(function(data) {
       var events = data[0];
-      var attendees = data[1].length;     
+      var attendees = data[1].length;
       res.render('event', { events: events, attendees: attendees })
     });
 });
@@ -55,21 +55,27 @@ router.get("/create", function(req, res) {
 
 router.get("/causes", function(req, res) {
 
-  db.Event.findAll({
-    where: {
-      CauseId: req.query.cause_id
-    },
-    include: [db.Cause]
-  })
-  .then((events) => {
-    console.log(JSON.stringify(events));
-    if(events.length == 0) {
-      res.redirect("/");
-    } else {
-      return res.render('index', {events: events});
-    }
-  });
+  Promise.all([
+    db.Event.findAll({
+      where: { CauseId: req.query.cause_id },
+      include: [db.Cause]
+    }),
+    db.Cause.findAll()])
+      .then((data) => {
+        console.log(JSON.stringify(data));
 
-})
+        if(data[0].length == 0) {
+          res.redirect("/");
+        } else {
+
+          var dataToRender = {
+              events: data[0],
+              causes: data[1]
+            }
+
+          return res.render('index', dataToRender);
+        }
+    });
+});
 
 module.exports = router;

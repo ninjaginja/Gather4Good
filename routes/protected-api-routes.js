@@ -11,7 +11,7 @@ router.post('/events/create', function (req, res) {
   db.Event.create(req.body).then(function(newEvent) {
     res.json(newEvent);
   });
-  
+
 });
 
 //Route to determine user auth status - called on each page load
