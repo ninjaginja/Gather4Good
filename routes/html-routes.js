@@ -47,9 +47,20 @@ router.get("/event/:id", function(req, res) {
       })
     ])
     .then(function(data) {
+      // console.log("....data.....");
+      // console.log(data[0].organizer_id);
+      // console.log("....data.....");      
       var events = data[0];
       var attendees = data[1].length;
-      res.render('event', { events: events, attendees: attendees })
+      var organizerId = data[0].organizer_id;
+      db.User.findOne({
+        where: {
+          id: organizerId
+        }
+      }).then(function(user) {
+      var organizer = user.name;
+      res.render('event', { events: events, attendees: attendees, organizer: organizer })        
+      });
     });
 });
 
