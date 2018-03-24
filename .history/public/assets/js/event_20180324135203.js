@@ -166,6 +166,7 @@ $(document).ready(function() {
           Materialize.toast('You are already going to this event!', 4000);
         } else {
           Materialize.toast("You're making a difference, see you there!", 4000)
+          // alert("You're making a difference, see you there!");
           setTimeout(function(){
             window.location.reload();
           }, 5000)
