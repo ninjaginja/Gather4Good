@@ -24,7 +24,9 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "jsonwebtoken": "^8.2.0",
+    "mysql": "^2.15.0",
     "mysql2": "^1.5.2",
+    "npm": "^5.8.0",
     "sequelize": "^4.37.1"
   }
 }

@@ -1,4 +1,4 @@
-USE causes_db;
+USE `mtvsmvxtihjejn8h`;
 #seed data for causes table;
 
 INSERT INTO causes(name) VALUES ("Gender Equality");
@@ -11,4 +11,4 @@ INSERT INTO causes(name) VALUES ("Human Rights");
 INSERT INTO causes(name) VALUES ("Immigration");
 INSERT INTO causes(name) VALUES ("Public Health");
 INSERT INTO causes(name) VALUES ("Economic Equality");
-INSERT INTO causes(name) VALUES ("Gun Violence");
+INSERT INTO causes(name) VALUES ("Gun Control");
