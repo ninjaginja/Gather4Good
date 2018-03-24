@@ -43,9 +43,11 @@ h5 {
 h6 {
     font-size: 18px
 }
-.card {
+.handlebars-events {
     width: 75vw;
-    margin: 20px;
+    /* margin: 20px; */
+    margin-left:10vw; 
+    margin-right:10vw
 }
 
 .address {
@@ -146,6 +148,18 @@ h6 {
 
 }
 
+
+@media only screen and (max-width: 800px) {
+    .handlebars-events {
+        width: 90vw;
+        /* margin: 20px; */
+        margin-left:3.5vw; 
+        margin-right:0
+    }
+
+}
+
+
 @media only screen and (max-width: 620px) { 
     .card-title {
        margin-left:0px
@@ -168,6 +182,12 @@ h6 {
 }
 
 @media only screen and (max-width: 500px) {
+    .handlebars-events {
+        width: 90vw;
+        /* margin: 20px; */
+        margin-left:3vw; 
+        margin-right:0
+    }
     #title{
         font-size:7vw
     }
@@ -179,11 +199,20 @@ h6 {
         width: 100vw;
         margin-left: 0
     }
+    .header-title{
+        margin-left: 8vw;
+    }
 
 }
 @media only screen and (max-width: 400px) {
 
     nav .brand-logo {
         left: 10%;
+    }
+    .handlebars-events {
+        width: 95vw;
+        /* margin: 20px; */
+        margin-left:0; 
+        margin-right:0
     }
 }

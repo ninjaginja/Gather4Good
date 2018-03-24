@@ -156,78 +156,15 @@
 
   <!-- Events Div -->
   <div class="row">
-    <div class="col s12 m7" style="margin-left:10vw; margin-right:10vw">
+    <div class="col s12 m7">
     <!-- Header -->
-    <h3 class="header" style="margin-left: 25px">Upcoming Events</h3>
+    <h3 class="header center header-title">Upcoming Events</h3>
 
       <!-- Generate event cards via handlebars -->
       {{#each events}}
         {{>events/event-block}}
       {{/each}}
 
-
-      <!-- First Card -->
-      <div class="row">
-      <div class="card horizontal hoverable">
-      <div class="card-stacked">
-        <div class="card-content">
-          <!-- Title, Location, and Cause -->
-          <h4>March for Our Lives | <span class="location"> Denver, Colorado</span><div class="chip right cause">Gun Violence</div></h4>
-          <!-- Date and Time -->
-          <h5 id='date'>Date: Saturday, March 24 @ <span id='time'> 2:00 PM</span> </h5>
-          <!-- Description -->
-          <p>On March 24, the kids and families of March For Our Lives will take to the streets to demand that their lives and safety become a priority and that we end gun violence and mass shootings in our schools today. March with us in Washington DC or march in your own community. On March 24, the collective voices of the March For Our Lives movement will be heard.</p>
-          <!-- Address -->
-          <h6 class="right-align">Location: <br><span class="address">Colorado State Capitol, 200 E Colfax Ave, Ste 136, Denver, CO 80203</span></h6>
-        </div>
-        <div class="card-action">
-          <a href="#">More Info</a>
-        </div>
-      </div>
-      </div>
-      </div>
-
-      <!-- Second Card -->
-      <div class="row">
-      <div class="card horizontal hoverable">
-      <div class="card-stacked">
-        <div class="card-content">
-          <!-- Title, Location, and Cause -->
-          <h4>Bith Bibble Jax | <span class="location"> Denver, Colorado</span><div class="chip right">LGBTQ Rights</div></h4>
-          <!-- Date and Time -->
-          <h5 id='date'>Date: Saturday, March 24 @ <span id='time'> 2:00 PM</span> </h5>
-          <!-- Description -->
-          <p> Chewbacca vella tavion maris dexter elom moore calrissian neimoidian. Yuvernian antonio tierce cognus jek atrivis kamino poggle. Farlax sing trandoshan joruus motti skywalker.</p>
-          <!-- Address -->
-          <h6 class="right-align">Location: <br><span class="address">Colorado State Capitol, 200 E Colfax Ave, Ste 136, Denver, CO 80203</span></h6>
-        </div>
-        <div class="card-action">
-          <a href="#">More Info</a>
-        </div>
-      </div>
-      </div>
-      </div>
-
-      <!-- Third Card -->
-      <div class="row">
-      <div class="card horizontal hoverable">
-      <div class="card-stacked">
-        <div class="card-content">
-          <!-- Title, Location, Cause -->
-          <h4>Yuvernian Antonio Tierce | <span class="location"> Denver, Colorado</span><div class="chip right">Immigration</div></h4>
-          <!-- Date and Time -->
-          <h5 id='date'>Date: Saturday, March 24 @ <span id='time'> 2:00 PM</span> </h5>
-          <!-- Description -->
-          <p>Amanin antilles ziro mandell rotta dug omwati kuat darth. Selkath ig-88 timoliini ventress. Lucas ipsum dolor sit amet bail iv kastolar jax tano senesca nas chewbacca vestara sebulba.</p>
-          <!-- Address -->
-          <h6 class="right-align">Location: <br><span class="address">Colorado State Capitol, 200 E Colfax Ave, Ste 136, Denver, CO 80203</span></h6>
-        </div>
-        <div class="card-action">
-          <a href="#">More Info</a>
-        </div>
-      </div>
-      </div>
-      </div>
     </div>
   </div>
 </main>
