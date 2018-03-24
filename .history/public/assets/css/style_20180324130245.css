@@ -1,0 +1,223 @@
+.collapsible {
+    width:50vw;
+    margin-left: 25vw;
+    margin-bottom: 50px
+}
+
+.btn, nav {
+    background-color:#43b5b1;
+    font-family: 'Rubik', sans-serif;
+}
+
+.btn {
+    margin: 5px;
+}
+
+li {
+    font-family: 'Rubik', sans-serif
+}
+
+.brand-logo {
+    margin-left: 50px;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Rubik', sans-serif
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.location {
+    font-size: 28px;
+}
+
+h5 {
+    font-size: 22px;
+}
+
+h6 {
+    font-size: 18px
+}
+.handlebars-events {
+    width: 75vw;
+    margin-left:11vw; 
+    margin-right:10vw
+}
+
+.address {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.modal {
+    max-height: 100%;
+}
+
+.tabs .tab a {
+    color: rgba(243,173,82,.7);
+}
+.tabs .tab a:hover, .tabs .tab a.active {
+    color: #ffab40;
+}
+
+.slider .indicators {
+    bottom: 50px;
+    z-index: 2;
+}
+
+.row .col.s12 {
+    width: 90%;
+}
+
+.collapsible-header{
+    font-size: 18px;
+}
+
+
+
+.image-container {
+    position: relative;
+    overflow:hidden;
+}
+.image-container:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.8));
+    z-index: 0;
+}
+
+.event-card {
+    margin-left: 18vw;
+    width: 60vw
+}
+
+.event-title {
+    position:relative;
+    top: -50px;
+    left: 40px;
+    font-size: 100px;
+    color:white
+
+}
+
+#title{
+ font-size: 38px
+}
+
+/* GREG CSS BEGIN */
+.modal-trigger {
+  display: none;
+}
+
+#logout-head,
+#side-logout {
+  display: none;
+}
+
+#error-msg {
+  color: red;
+}
+
+.incomplete
+#incomplete-form-msg {
+  color: red; 
+  display: none;
+}
+/* GREG CSS END */
+
+
+/* Media Queries */
+@media only screen and (max-width: 992px) {
+
+    nav .brand-logo {
+        left: 30%;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@media only screen and (max-width: 850px) {
+    .event-card{
+        width: 75vw;
+        margin-left: 11vw
+    }
+
+}
+
+
+@media only screen and (max-width: 800px) {
+    .handlebars-events {
+        width: 90vw;
+        /* margin: 20px; */
+        margin-left:3.5vw; 
+        margin-right:0
+    }
+
+}
+
+
+@media only screen and (max-width: 620px) { 
+    .card-title {
+       margin-left:0px
+    }
+
+}
+@media only screen and (max-width: 600px) {
+
+    nav .brand-logo {
+        left: 25%;
+    }
+    .collapsible {
+        width: 75vw;
+        margin-left: 12vw
+    }
+    .event-card {
+        width: 90vw;
+        margin-left: 10px
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .handlebars-events {
+        width: 90vw;
+        /* margin: 20px; */
+        margin-left:3vw; 
+        margin-right:0
+    }
+    #title{
+        font-size:7vw
+    }
+
+    nav .brand-logo {
+        left: 20%;
+    }
+    .collapsible {
+        width: 100vw;
+        margin-left: 0
+    }
+    .header-title{
+        margin-left: 8vw;
+    }
+
+}
+@media only screen and (max-width: 400px) {
+
+    nav .brand-logo {
+        left: 10%;
+    }
+    .handlebars-events {
+        width: 95vw;
+        /* margin: 20px; */
+        margin-left:0; 
+        margin-right:0
+    }
+}
