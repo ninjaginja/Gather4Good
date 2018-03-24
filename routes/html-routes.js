@@ -9,11 +9,17 @@ var db = require('../models');
 router.get("/", function(req, res) {
   Promise.all([
     db.Event.findAll({
-      include: [db.Cause]
+      include: [db.Cause],
+      order: [
+        ['id', 'DESC']
+      ]
     }),
     db.Cause.findAll()
   ])
   .then(function(data) {
+    console.log("......");
+    console.log(data[0]);
+    console.log("......");    
     var data = {
       events: data[0],
       causes: data[1]
@@ -61,7 +67,10 @@ router.get("/causes", function(req, res) {
   Promise.all([
     db.Event.findAll({
       where: { CauseId: req.query.cause_id },
-      include: [db.Cause]
+      include: [db.Cause],
+      order: [
+        ['id', 'DESC']
+      ]
     }),
     db.Cause.findAll()])
       .then((data) => {
