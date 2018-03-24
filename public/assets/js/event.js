@@ -107,7 +107,7 @@ $(document).ready(function() {
     console.log("property array:" + propertyArr);
 
     propertyArr.forEach(function(property) {
-      if(!eventObj[property] || eventObj[property] == "") {
+      if(!eventObj[property] || eventObj[property] == " ") {
         validated = false;
       }
     });
