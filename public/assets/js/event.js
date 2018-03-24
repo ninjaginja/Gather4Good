@@ -72,7 +72,16 @@ $(document).ready(function() {
         "data": newEvent
     }
 
-    createNewEvent(newEventSettings);
+    validationStatus = validateForm(newEvent);
+    console.log("Validation status: " +  validationStatus);
+
+    if (!validationStatus) {
+      $("#incomplete-form-msg").show();
+      return
+    } else {
+      createNewEvent(newEventSettings);
+    }
+
   });
 
   //On click event listener to render display of events by specific cause
@@ -89,5 +98,80 @@ $(document).ready(function() {
       window.location.href = "/causes?cause_id=" + causeId;
     }
   }
+
+  // Basic validation preventing event form submission
+  // with empty input or textareas
+  function validateForm(eventObj) {
+    var validated = true;
+    var propertyArr = Object.keys(eventObj);
+    console.log("property array:" + propertyArr);
+
+    propertyArr.forEach(function(property) {
+      if(!eventObj[property] || eventObj[property] == " ") {
+        validated = false;
+      }
+    });
+    return validated;
+  }
+
+  // Event listener to hide error msg re event form submission
+  $("input, textarea").on("focus", function(event) {
+    event.preventDefault();
+    console.log("input focus called");
+    $("#incomplete-form-msg").hide();
+  })
+
+
+  //listener on join button, sends post request to server to join event.
+  $(".joinBtn").on("click", function() {
+
+    var event = {
+      id: $(this).data("id")
+      };
+    var token = localStorage.getItem("token");
+    // console.log("Event Id: " + event);
+
+    var Settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "/api/events/join",
+      "method": "POST",
+      "headers": {
+        "x-access-token": token,
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "data": event
+    }
+    joinEvent(Settings);
+  });
+
+  //post request to join event with authentication handling.
+  function joinEvent(Settings) {
+    $.ajax(Settings)
+      .done(function (response) {
+        if(!response) {
+          alert("You are already going to this event!");
+          window.location.href = "/";
+        } else {
+          alert("You're making a difference, see you there!");
+          window.location.href = "/";
+        }
+      })
+      .fail(function (response) {
+        console.log(typeof response);
+        console.log(response);
+        console.log(response.responseJSON.message);
+
+        if (response.responseJSON.message === "Token expired") {
+          localStorage.removeItem("token");
+        }
+
+        $(".modal-trigger").show();
+        $("#error-msg").text("Please login before joining an event");
+        $("#modal1").modal("open");
+      });
+  }
+
 
 });

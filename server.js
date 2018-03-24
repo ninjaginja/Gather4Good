@@ -30,6 +30,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 //*********   MOUNT ROUTES HERE   *********//
+
 app.use("/api", apiRoutes);
 app.use("/", htmlRoutes);
 

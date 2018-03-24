@@ -153,6 +153,7 @@ h6 {
 
 }
 
+<<<<<<< HEAD
 
 @media only screen and (max-width: 800px) {
     .handlebars-events {
@@ -166,6 +167,9 @@ h6 {
 
 
 @media only screen and (max-width: 620px) { 
+=======
+@media only screen and (max-width: 620px) {
+>>>>>>> f89509c4d0cb1037f9bede335f4cab0bffb70e1d
     .card-title {
        margin-left:0px
     }
