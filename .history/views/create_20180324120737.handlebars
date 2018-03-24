@@ -1,0 +1,127 @@
+<main>
+
+<!-- Events Div -->
+<div class="center">
+    <h2 style="font-family: 'Kanit', sans-serif;">Create an Event</h2>
+</div>
+
+<div class='event-input valign-wrapper'>
+<ul class="collapsible" data-collapsible="accordion">
+    <li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 1 of 5)
+          </div>
+      <div class="collapsible-header">
+        <i class="material-icons">description</i>Tell Us About Your Event
+      </div>
+
+      <div class="collapsible-body"><span></span>
+        <div class="row">
+            <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="event_name" type="text" class="validate">
+            <label for="name">Event Name</label>
+          </div>
+        </div>
+            </div>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="event_description" class="materialize-textarea" data-length="200"></textarea>
+                      <label for="event_description">Event Description</label>
+                    </div>
+                  </div>
+            </form>
+          </div>
+        </div>
+    </li>
+    <li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 2 of 5)
+          </div>
+        <div class="collapsible-header"><i class="material-icons">image</i>Upload an Image (Optional)</div>
+        <div class="collapsible-body"><span></span>
+          <div class="row">
+              <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="image_url" type="text">
+              <label for="image_url">Image URL</label>
+            </div>
+          </div>
+          </div>
+          </div>
+      </li>
+    <li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 3 of 5)
+          </div>
+      <div class="collapsible-header"><i class="material-icons">chat</i>What's Your Event's Cause?</div>
+      <div class="collapsible-body"><span></span>
+        <div class="input-field col s12">
+            <select id="cause_category">
+              <option value="" disabled selected>Choose Your Cause</option>
+              {{#each causes}}
+                {{>causes/cause-block}}
+              {{/each}}
+            </select>
+          </div>
+      </div>
+    </li>
+    <li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 4 of 5)
+          </div>
+				<div class="collapsible-header"><i class="material-icons">event_note</i>Event Date and Time</div>
+        <div class="collapsible-body">
+          <span>Date</span>
+          <input id='event_date' type="text" class="datepicker">
+          <span>Time</span>
+          <input id='event_time' type="text" class="timepicker">
+        </div>
+		</li>
+		<li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 5 of 5)
+          </div>
+				<div class="collapsible-header"><i class="material-icons">place</i>Event Location</div>
+        <div class="collapsible-body"><span></span>
+          <div class="row">
+              <div class="col s12">
+                <div class="input-field inline" style="width:300px">
+                  <input id="location_name" type="text" class="validate" placeholder="i.e. City Hall">
+                  <label for="location_name" >Location Name (Optional)</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field inline">
+                    <input id="street" type="text" class="validate">
+                    <label for="street">Street Address</label>
+                  </div>
+                <div class="input-field inline">
+                    <input id="city" type="text" class="validate">
+                    <label for="city">City</label>
+                </div>
+
+                <div class="input-field inline">
+                    <input id="state" type="text" class="validate">
+                    <label for="state">State</label>
+                </div>
+                <div class="input-field inline"style="width:200px;">
+                    <input id="zipcode" type="text" class="validate">
+                    <label for="zipcode">Zip Code</label>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="collapsible-header">                    
+              <div id="incomplete-form-msg">Please complete all fields to create your event.</div>
+              <button id="new-event-btn" style="margin-top: 20px" class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+            </div>
+
+        </div>
+    </li>
+  </ul>
+</main>

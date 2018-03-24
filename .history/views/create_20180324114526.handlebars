@@ -1,0 +1,250 @@
+<header>
+  <!-- NavBar -->
+  <nav style="height: 70px">
+    <div class="nav-wrapper">
+      <!-- Logo Image -->
+      <a href="/" class="brand-logo"><img src="./assets/images/gather-box-logo-small.png"></a>
+
+      <!--  -->
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <!-- <li><a href="">Organize An Event</a></li> -->
+        <li><a id="login-anchor-head" href="#modal1" class="modal-trigger">Login</a></li>
+        <li><a id="reg-anchor-head" href="#modal1" class="modal-trigger">Sign Up</a></li>
+        <li><a id="logout-head" class="logout">Logout</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href=""><i class="material-icons right" style="margin-right:-10px">clear</i></a></li>
+        <!-- <li><a href="">Organize An Event</a></li> -->
+        <li><a id="login-anchor-side" href="#modal1" class="modal-trigger">Login</a></li>
+        <li><a id="reg-anchor-side" href="#modal1" class="modal-trigger">Sign Up</a></li>
+        <li><a id="side-logout" class="logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Image -->
+  <img class="responsive-img" src="./assets/images/march_dc_small.jpg">
+
+</header>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+
+    <!-- Modal Tabs -->
+    <div class="col s12">
+      <ul class="tabs">
+        <!-- Login Tab -->
+        <li class="tab col s3"><a id="login-anchor-modal" href="#login">Login</a></li>
+        <!-- Sign Up Tab -->
+        <li class="tab col s3"><a id="reg-anchor-modal" href="#signup">Sign Up</a></li>
+        <!-- Close Icon -->
+        <li class="right modal-close"><i class="material-icons valign-center">clear</i></li>
+      </ul>
+    </div>
+
+    <!-- Login Tab -->
+    <div id="login" class="col s12">
+      <!-- Section Header -->
+      <h4 style="padding-top: 20px;">Enter Your Info</h4>
+
+      <!--  Login Form-->
+      <div class="row">
+        <form class="col s12">
+          <!-- Email -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="login-email" type="email" class="validate">
+              <label for="login-email">Email</label>
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="login-password" type="password" class="validate">
+              <label for="login-password">Password</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+
+      <!-- Sign Up Tab -->
+      <div id="signup" class="col s12" style="margin-left:11px">
+        <!-- Section Header -->
+        <h4>Enter Your Info</h4>
+
+        <!-- Sign Up Form -->
+        <div class="row">
+          <form class="col s12">
+            <!-- First Row -->
+            <div class="row">
+              <!-- First Name -->
+              <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+              </div>
+
+              <!-- Last Name -->
+              <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+            <!-- Second Row -->
+            <div class="row">
+              <!-- Email -->
+              <div class="input-field col s12">
+                <input id="reg-email" type="email" class="validate">
+                <label for="reg-email">Email</label>
+              </div>
+            </div>
+            <!-- Third Row -->
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="reg-password" type="password" class="validate">
+                <label for="reg-password">Password</label>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Error Display -->
+    <div id="error-msg"></div>
+
+    <!-- Submit Button -->
+    <button id="submit-btn" style="margin-bottom:15px" class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
+  </div>
+</div>
+
+<main>
+
+<!-- Events Div -->
+<div class="center">
+    <h2 style="font-family: 'Kanit', sans-serif;">Create an Event</h2>
+</div>
+
+<div class='event-input valign-wrapper'>
+<ul class="collapsible" data-collapsible="accordion">
+    <li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 1 of 5)
+          </div>
+      <div class="collapsible-header">
+        <!-- <span class="valign-wrapper" style="font-size: 14px;color:lightgray"><p style=""></p></span> -->
+        <i class="material-icons">description</i>Tell Us About Your Event
+      </div>
+
+      <div class="collapsible-body"><span></span>
+        <div class="row">
+            <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="event_name" type="text" class="validate">
+            <label for="name">Event Name</label>
+          </div>
+        </div>
+            </div>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="event_description" class="materialize-textarea" data-length="200"></textarea>
+                      <label for="event_description">Event Description</label>
+                    </div>
+                  </div>
+            </form>
+          </div>
+        </div>
+    </li>
+    <li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 2 of 5)
+          </div>
+        <div class="collapsible-header"><i class="material-icons">image</i>Upload an Image (Optional)</div>
+        <div class="collapsible-body"><span></span>
+          <div class="row">
+              <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <!-- <input id="image_url" type="text" class="validate" data-success='right' data-error='wrong'> -->
+              <input id="image_url" type="text">
+              <label for="image_url">Image URL</label>
+            </div>
+          </div>
+          </div>
+          </div>
+      </li>
+    <li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 3 of 5)
+          </div>
+      <div class="collapsible-header"><i class="material-icons">chat</i>What's Your Event's Cause?</div>
+      <div class="collapsible-body"><span></span>
+        <div class="input-field col s12">
+            <select id="cause_category">
+              <option value="" disabled selected>Choose Your Cause</option>
+              {{#each causes}}
+                {{>causes/cause-block}}
+              {{/each}}
+            </select>
+          </div>
+      </div>
+    </li>
+    <li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 4 of 5)
+          </div>
+				<div class="collapsible-header"><i class="material-icons">event_note</i>Event Date and Time</div>
+        <div class="collapsible-body">
+          <span>Date</span>
+          <input id='event_date' type="text" class="datepicker">
+          <span>Time</span>
+          <input id='event_time' type="text" class="timepicker">
+        </div>
+		</li>
+		<li>
+        <div class="chip" style="background-color: white; color:rgba(0,0,0,0.3);margin-bottom:-5px">
+            (Step 5 of 5)
+          </div>
+				<div class="collapsible-header"><i class="material-icons">place</i>Event Location</div>
+        <div class="collapsible-body"><span></span>
+          <div class="row">
+              <div class="col s12">
+                <div class="input-field inline" style="width:300px">
+                  <input id="location_name" type="text" class="validate" placeholder="i.e. City Hall">
+                  <label for="location_name" >Location Name (Optional)</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field inline">
+                    <input id="street" type="text" class="validate">
+                    <label for="street">Street Address</label>
+                  </div>
+                <div class="input-field inline">
+                    <input id="city" type="text" class="validate">
+                    <label for="city">City</label>
+                </div>
+
+                <div class="input-field inline">
+                    <input id="state" type="text" class="validate">
+                    <label for="state">State</label>
+                </div>
+                <div class="input-field inline"style="width:200px;">
+                    <input id="zipcode" type="text" class="validate">
+                    <label for="zipcode">Zip Code</label>
+                </div>
+                                <div class="col s12">
+                    <div id="incomplete-form-msg">Please complete all fields to create your event.</div>
+                    <button id="new-event-btn" style="margin-top: 20px" class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                </div>
+              </div>
+              </div>
+            </div>
+        </div>
+    </li>
+  </ul>
