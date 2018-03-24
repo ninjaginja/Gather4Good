@@ -7,18 +7,27 @@ var db = require('../models');
 
 //GET route to load the landing-page from the ROOT directory//
 router.get("/", function(req, res) {
-    db.Event.findAll({ include: [db.Cause]})
-    .then((events) => {
-      db.Cause.findAll()
-      .then((causes) => {
-        var data = {
-          events: events,
-          causes: causes
-        }
-        res.render('index', data)
-      });
-    });
+  Promise.all([
+    db.Event.findAll({
+      include: [db.Cause],
+      order: [
+        ['id', 'DESC']
+      ]
+    }),
+    db.Cause.findAll()
+  ])
+  .then(function(data) {
+    console.log("......");
+    console.log(data[0]);
+    console.log("......");    
+    var data = {
+      events: data[0],
+      causes: data[1]
+    }
+    res.render('index', data)
+  });
 });
+
 
 //GET route to load the event-specific pages//
 router.get("/event/:id", function(req, res) {
@@ -58,7 +67,10 @@ router.get("/causes", function(req, res) {
   Promise.all([
     db.Event.findAll({
       where: { CauseId: req.query.cause_id },
-      include: [db.Cause]
+      include: [db.Cause],
+      order: [
+        ['id', 'DESC']
+      ]
     }),
     db.Cause.findAll()])
       .then((data) => {
