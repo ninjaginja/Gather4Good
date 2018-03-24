@@ -8,6 +8,16 @@ router.post('/events/create', function (req, res) {
   req.body.organizer_id = req.userID;
   console.log(req.body);
 
+  if(req.body.img_url == "") {
+    req.body.img_url = null;
+  }
+
+  if(req.body.location_name == "") {
+    req.body.location_name = null;
+  }
+
+  console.log(req.body);
+
   db.Event.create(req.body).then(function(newEvent) {
     res.json(newEvent);
   });
