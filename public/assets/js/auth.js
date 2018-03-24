@@ -31,28 +31,34 @@ $(document).ready(function() {
 
     console.log(newUser);
     //call validation fxn here - if true, execute rest of code
+    var validationStatus = validateUserAuthInput(newUser);
 
-    $.ajax({
-      method: "POST",
-      url: "/api/register",
-      data: newUser
-    })
-    .done(function(data) {
-      console.log(data);
-      localStorage.setItem("token", data.token);
-      var token = localStorage.getItem("token");
-      console.log(token);
-      hideLoginAndDismissModal();
-    })
-    .fail(function(response) {
-      console.log(typeof response);
-      console.log(response);
-      console.log(response.responseJSON.message);
+    if(!validationStatus) {
+      $("#error-msg").text("Please fill in all fields to register");
+    } else {
 
-      if (response.responseJSON.message === "User already exists") {
-        setUserExistsDisplay();
-      }
-    });
+      $.ajax({
+        method: "POST",
+        url: "/api/register",
+        data: newUser
+      })
+      .done(function(data) {
+        console.log(data);
+        localStorage.setItem("token", data.token);
+        var token = localStorage.getItem("token");
+        console.log(token);
+        hideLoginAndDismissModal();
+      })
+      .fail(function(response) {
+        console.log(typeof response);
+        console.log(response);
+        console.log(response.responseJSON.message);
+
+        if (response.responseJSON.message === "User already exists") {
+          setUserExistsDisplay();
+        }
+      });
+    }
   }
 
 //======================================
@@ -64,34 +70,39 @@ $(document).ready(function() {
     }
 
     console.log(credentials);
-    //call validation fxn here - if true, execute rest of code
+    var validationStatus = validateUserAuthInput(credentials);
 
-    $.ajax({
-      method: "POST",
-      url: "/api/login",
-      data: credentials
-    })
-    .done(function(data) {
-      console.log(data);
-      localStorage.setItem("token", data.token);
-      var token = localStorage.getItem("token");
-      console.log(token);
-      hideLoginAndDismissModal();
-    })
-    .fail(function(response) {
-      console.log(typeof response);
-      console.log(response);
-      console.log(response.responseJSON.message);
+    if(!validationStatus) {
+      $("#error-msg").text("Please fill in all fields to login");
+    } else {
 
-      var message = response.responseJSON.message;
+      $.ajax({
+        method: "POST",
+        url: "/api/login",
+        data: credentials
+      })
+      .done(function(data) {
+        console.log(data);
+        localStorage.setItem("token", data.token);
+        var token = localStorage.getItem("token");
+        console.log(token);
+        hideLoginAndDismissModal();
+      })
+      .fail(function(response) {
+        console.log(typeof response);
+        console.log(response);
+        console.log(response.responseJSON.message);
 
-      if(message === "Wrong password") {
-        $("#error-msg").text("Sorry, the password you entered is incorrect.");
-      } else if(message === "User not found") {
-        $("#error-msg").text("Sorry, we have no user registered with that email");
-      }
+        var message = response.responseJSON.message;
 
-    });
+        if(message === "Wrong password") {
+          $("#error-msg").text("Sorry, the password you entered is incorrect.");
+        } else if(message === "User not found") {
+          $("#error-msg").text("Sorry, we have no user registered with that email");
+        }
+
+      });
+    }
   }
 
   function determineAuthStatus() {
@@ -202,16 +213,17 @@ $(document).ready(function() {
   });
 
 
-  function validateUserAuthInput() {
+  function validateUserAuthInput(authObj) {
     var validated = true;
-    var propertyArr = Object.keys(eventObj);
-    console.log("property array:" + propertyArr);
+    var propertyArr = Object.keys(authObj);
+    console.log("auth property array:" + propertyArr);
 
     propertyArr.forEach(function(property) {
-      if(!eventObj[property] || eventObj[property] == " ") {
+      if(!authObj[property] || authObj[property] == " ") {
         validated = false;
       }
     });
+
     return validated;
   }
 
