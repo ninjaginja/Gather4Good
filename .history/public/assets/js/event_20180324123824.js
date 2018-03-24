@@ -15,7 +15,7 @@ $(document).ready(function() {
           location_name: $("#location_name").val().trim(),
           location_street: $("#street").val().trim(),
           location_city: $("#city").val().trim(),
-          location_state: $("#state").val(),
+          location_state: $("#state").val().trim(),
           location_zip: $("#zipcode").val().trim()
         }
 
@@ -154,13 +154,13 @@ $(document).ready(function() {
         if(!response) {
           Materialize.toast('You are already going to this event!', 4000);
           setTimeout(function(){
-            window.location.reload();
+            window.location.href = "/";
           }, 5000)
         } else {
           Materialize.toast("You're making a difference, see you there!", 4000)
           // alert("You're making a difference, see you there!");
           setTimeout(function(){
-            window.location.reload();
+            window.location.href = "/";
           }, 5000)
         }
       })

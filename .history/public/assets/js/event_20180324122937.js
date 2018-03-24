@@ -15,7 +15,7 @@ $(document).ready(function() {
           location_name: $("#location_name").val().trim(),
           location_street: $("#street").val().trim(),
           location_city: $("#city").val().trim(),
-          location_state: $("#state").val(),
+          location_state: $("#state").val().trim(),
           location_zip: $("#zipcode").val().trim()
         }
 
@@ -145,7 +145,9 @@ $(document).ready(function() {
     }
     joinEvent(Settings);
   });
-  
+  var toastElement = $('.toast').first()[0];
+  var toastInstance = toastElement.M_Toast;
+
 
   //post request to join event with authentication handling.
   function joinEvent(Settings) {
@@ -153,15 +155,13 @@ $(document).ready(function() {
       .done(function (response) {
         if(!response) {
           Materialize.toast('You are already going to this event!', 4000);
-          setTimeout(function(){
-            window.location.reload();
-          }, 5000)
+          toastInstance.remove();
+          // window.location.href = "/";
         } else {
           Materialize.toast("You're making a difference, see you there!", 4000)
+          toastInstance.remove();
           // alert("You're making a difference, see you there!");
-          setTimeout(function(){
-            window.location.reload();
-          }, 5000)
+          // window.location.href = "/";
         }
       })
       .fail(function (response) {

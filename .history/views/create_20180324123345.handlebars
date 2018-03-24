@@ -1,5 +1,3 @@
-  <!-- Header Image -->
-  <img class="responsive-img" src="/assets/images/march_dc_small.jpg">
 <main>
 
 <!-- Events Div -->
@@ -23,7 +21,7 @@
         <div class="row">
           <div class="input-field col s12">
             <input id="event_name" type="text" class="validate">
-            <label for="name">* Event Name</label>
+            <label for="name">Event Name</label>
           </div>
         </div>
             </div>
@@ -32,7 +30,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                       <textarea id="event_description" class="materialize-textarea" data-length="200"></textarea>
-                      <label for="event_description">* Event Description</label>
+                      <label for="event_description">Event Description</label>
                     </div>
                   </div>
             </form>
@@ -47,7 +45,7 @@
       <div class="collapsible-body"><span></span>
         <div class="input-field col s12">
             <select id="cause_category">
-              <option value="" disabled selected>* Choose Your Cause</option>
+              <option value="" disabled selected>Choose Your Cause</option>
               {{#each causes}}
                 {{>causes/cause-block}}
               {{/each}}
@@ -79,9 +77,9 @@
           </div>
 				<div class="collapsible-header"><i class="material-icons">event_note</i>Event Date and Time</div>
         <div class="collapsible-body">
-          <span>* Date</span>
+          <span>Date</span>
           <input id='event_date' type="text" class="datepicker">
-          <span>* Time</span>
+          <span>Time</span>
           <input id='event_time' type="text" class="timepicker">
         </div>
 		</li>
@@ -95,20 +93,20 @@
               <div class="col s12">
                 <div class="input-field inline" style="width:300px">
                   <input id="location_name" type="text" class="validate" placeholder="i.e. City Hall">
-                  <label for="location_name">Location Name (Optional)</label>
+                  <label for="location_name" >Location Name (Optional)</label>
                 </div>
               </div>
               <div class="col s12">
                 <div class="input-field inline">
                     <input id="street" type="text" class="validate">
-                    <label for="street">* Street Address</label>
+                    <label for="street">Street Address</label>
                   </div>
                 <div class="input-field inline">
                     <input id="city" type="text" class="validate">
-                    <label for="city">* City</label>
+                    <label for="city">City</label>
                 </div>
 
-  <div class="input-field">
+  <div class="input-field col s12">
     <select id="state">
       <option value="" disabled selected>Select State</option>
 	<option value="AL">Alabama</option>
@@ -163,7 +161,7 @@
 	<option value="WI">Wisconsin</option>
 	<option value="WY">Wyoming</option>
 </select>
-    <label>* State</label>
+    <label>State</label>
   </div>
                 {{!-- <div class="input-field inline">
                     <input id="state" type="text" class="validate">
@@ -171,13 +169,13 @@
                 </div> --}}
                 <div class="input-field inline"style="width:200px;">
                     <input id="zipcode" type="text" class="validate">
-                    <label for="zipcode">* Zip Code</label>
+                    <label for="zipcode">Zip Code</label>
                 </div>
               </div>
               </div>
             </div>
             <div class="">                    
-              <div id="incomplete-form-msg" style="margin-top: 20px; margin-left: 20px">* Please complete all fields to create your event.</div>
+              <div id="incomplete-form-msg" style="margin-top: 20px; margin-left: 20px">Please complete all fields to create your event.</div>
               <button id="new-event-btn" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px " class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
             </div>
 
