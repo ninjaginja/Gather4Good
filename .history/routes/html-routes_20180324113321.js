@@ -68,13 +68,13 @@ router.get("/causes", function(req, res) {
         //   res.redirect("/");
         // } else {
 
-          var dataToRender = {
-              events: data[0],
-              causes: data[1]
-            }
+        //   var dataToRender = {
+        //       events: data[0],
+        //       causes: data[1]
+        //     }
 
           return res.render('index', dataToRender);
-        // }
+        }
     });
 });
 

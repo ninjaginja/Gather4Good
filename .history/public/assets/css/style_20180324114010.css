@@ -45,7 +45,8 @@ h6 {
 }
 .handlebars-events {
     width: 75vw;
-    margin-left:11vw; 
+    /* margin: 20px; */
+    margin-left:14vw; 
     margin-right:10vw
 }
 

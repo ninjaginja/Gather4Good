@@ -74,7 +74,7 @@ router.get("/causes", function(req, res) {
             }
 
           return res.render('index', dataToRender);
-        // }
+        }
     });
 });
 
