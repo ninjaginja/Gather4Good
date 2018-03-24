@@ -99,6 +99,8 @@ $(document).ready(function() {
     }
   }
 
+  // Basic validation preventing event form submission
+  // with empty input or textareas
   function validateForm(eventObj) {
     var validated = true;
     var propertyArr = Object.keys(eventObj);
@@ -112,11 +114,13 @@ $(document).ready(function() {
     return validated;
   }
 
+  // Event listener to hide error msg re event form submission
   $("input, textarea").on("focus", function(event) {
     event.preventDefault();
     console.log("input focus called");
     $("#incomplete-form-msg").hide();
   })
+
 
   //listener on join button, sends post request to server to join event.
   $(".joinBtn").on("click", function() {
@@ -150,7 +154,7 @@ $(document).ready(function() {
           alert("You are already going to this event!");
           window.location.href = "/";
         } else {
-          alert("You're making a difference, see you there!");          
+          alert("You're making a difference, see you there!");
           window.location.href = "/";
         }
       })
