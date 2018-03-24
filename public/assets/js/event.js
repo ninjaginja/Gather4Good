@@ -30,10 +30,12 @@ $(document).ready(function() {
     $.ajax(newEventSettings)
       .done(function(response) {
         console.log(response);
+        console.log("TEST: " + response.id);
         // console.log(response.id);
         // $.get("/event/" + response.id, function(err) {
         //   if(err) throw err;
         // })
+        window.location.href = "/event/" + response.id;
       })
       .fail(function(response) {
         console.log(typeof response);
@@ -102,8 +104,16 @@ $(document).ready(function() {
   // Basic validation preventing event form submission
   // with empty input or textareas
   function validateForm(eventObj) {
+
     var validated = true;
-    var propertyArr = Object.keys(eventObj);
+    var objToValidate = Object.assign({}, eventObj);
+    ['img_url', 'location_name'].forEach(e => delete objToValidate[e]);
+
+    console.log("New Object to validate:");
+    console.log(objToValidate);
+    console.log("Old object:");
+    console.log(eventObj);
+    var propertyArr = Object.keys(objToValidate);
     console.log("property array:" + propertyArr);
 
     propertyArr.forEach(function(property) {
@@ -111,6 +121,7 @@ $(document).ready(function() {
         validated = false;
       }
     });
+
     return validated;
   }
 
