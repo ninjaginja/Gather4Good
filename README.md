@@ -1,6 +1,6 @@
 # Gather4Good
 
-##Introduction
+## Introduction
 > Gather4Good is a web application that allows users to connect and create communities around social, political, and charitable causes by organizing and joining events.
 
 ----
@@ -30,7 +30,7 @@ To get the project up and running on your local machine for development and test
 * Create a user profile or login to your existing account. (You must complete this step before creating or joining any events.)
 * Create a new event.
 
-##Authors
+## Authors
 * [Kelsi Summers] (https://github.com/kelsisummers)
 * [Greg Brodzik] (https://github.com/gjb117)
 * [Benjamin Cash] (https://github.com/benjaminjcash)
