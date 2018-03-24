@@ -72,7 +72,16 @@ $(document).ready(function() {
         "data": newEvent
     }
 
-    createNewEvent(newEventSettings);
+    validationStatus = validateForm(newEvent);
+    console.log("Validation status: " +  validationStatus);
+
+    if (!validationStatus) {
+      $("#incomplete-form-msg").show();
+      return
+    } else {
+      createNewEvent(newEventSettings);
+    }
+
   });
 
   //On click event listener to render display of events by specific cause
@@ -89,6 +98,25 @@ $(document).ready(function() {
       window.location.href = "/causes?cause_id=" + causeId;
     }
   }
+
+  function validateForm(eventObj) {
+    var validated = true;
+    var propertyArr = Object.keys(eventObj);
+    console.log("property array:" + propertyArr);
+
+    propertyArr.forEach(function(property) {
+      if(!eventObj[property] || eventObj[property] == "") {
+        validated = false;
+      }
+    });
+    return validated;
+  }
+
+  $("input, textarea").on("focus", function(event) {
+    event.preventDefault();
+    console.log("input focus called");
+    $("#incomplete-form-msg").hide();
+  })
 
   //listener on join button, sends post request to server to join event.
   $(".joinBtn").on("click", function() {
@@ -140,5 +168,6 @@ $(document).ready(function() {
         $("#modal1").modal("open");
       });
   }
+
 
 });
