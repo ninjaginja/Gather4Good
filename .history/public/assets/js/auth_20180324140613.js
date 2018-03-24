@@ -111,7 +111,7 @@ $(document).ready(function() {
     var ajaxSettings = {
         "async": true,
         "crossDomain": true,
-        "url": "/api/user_info",
+        "url": "http://localhost:8080/api/user_info",
         "method": "GET",
         "headers": {
           "x-access-token": token,
