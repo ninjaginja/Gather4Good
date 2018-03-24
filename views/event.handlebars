@@ -29,8 +29,11 @@
         <h5 id='time' style="font-weight:bold;font-size: 26px;"><span style="color: #308280">Time: </span> 
         <span style="font-weight: normal; font-size: 20px">{{events.time}}</span></h5>
         {{!-- Number of Attendees --}}
-        <h8 id='date' style="font-weight:bold;font-size: 26px"><span style="color: #308280">Attendees: </span>
-        <span style="font-weight: normal; font-size: 20px">{{attendees}}</span></h8>
+        <h5 id='attendee' style="font-weight:bold;font-size: 26px"><span style="color: #308280">Attendees: </span>
+        <span style="font-weight: normal; font-size: 20px">{{attendees}}</span></h5>
+        {{!-- Organizer --}}
+        <h5 id='organizer' style="font-weight:bold;font-size: 26px"><span style="color: #308280">Organizer: </span>
+        <span style="font-weight: normal; font-size: 20px">{{organizer}}</span></h5>
         {{!-- Event Description --}}
         <p style="font-size: 20px; padding-top: 15px">{{events.description}}</p>
         {{!-- Location --}}
