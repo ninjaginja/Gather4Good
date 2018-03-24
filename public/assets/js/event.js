@@ -30,10 +30,12 @@ $(document).ready(function() {
     $.ajax(newEventSettings)
       .done(function(response) {
         console.log(response);
+        console.log("TEST: " + response.id);
         // console.log(response.id);
         // $.get("/event/" + response.id, function(err) {
         //   if(err) throw err;
         // })
+        window.location.href = "/event/" + response.id;
       })
       .fail(function(response) {
         console.log(typeof response);
