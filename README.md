@@ -3,8 +3,6 @@
 ## Introduction
 > Gather4Good is a web application that allows users to connect and create communities around social, political, and charitable causes by organizing and joining events.
 
-----
-
 ## Heroku Link
 -insert link here-
 
@@ -19,7 +17,7 @@
 * Heroku
 
 ## Installing
-To get the project up and running on your local machine for development and testing, clone the [Gather4Good Repository] (https://github.com/ninjaginja/Gather4Good.git). Run npm install on your command line. Create a MySQL database called causes_db. (Note: You will need to update the config file with your local server credentials.)
+To get the project up and running on your local machine for development and testing, clone the [Gather4Good Repository](https://github.com/ninjaginja/Gather4Good.git). Run npm install on your command line. Create a MySQL database called causes_db. (Note: You will need to update the config file with your local server credentials.)
 
 ## Step-by-Step
 * Run node server.js on your command line to start the server and create tables in causes_db.
@@ -31,7 +29,7 @@ To get the project up and running on your local machine for development and test
 * Create a new event.
 
 ## Authors
-* [Kelsi Summers] (https://github.com/kelsisummers)
-* [Greg Brodzik] (https://github.com/gjb117)
-* [Benjamin Cash] (https://github.com/benjaminjcash)
-* [Molly Wojcik] (https://github.com/ninjaginja)
+* [Kelsi Summers](https://github.com/kelsisummers)
+* [Greg Brodzik](https://github.com/gjb117)
+* [Benjamin Cash](https://github.com/benjaminjcash)
+* [Molly Wojcik](https://github.com/ninjaginja)
