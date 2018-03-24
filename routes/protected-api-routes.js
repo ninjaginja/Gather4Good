@@ -2,6 +2,7 @@ var db = require("../models");
 var express = require("express");
 var router = express.Router();
 
+//Route to create a new event
 router.post('/events/create', function (req, res) {
 
   req.body.organizer_id = req.userID;
@@ -10,17 +11,17 @@ router.post('/events/create', function (req, res) {
   db.Event.create(req.body).then(function(newEvent) {
     res.json(newEvent);
   });
+  
 });
 
+//Route to determine user auth status - called on each page load
 router.get('/user_info', function (req, res) {
-
   //Send ID if token exists and valid
   res.json({auth: true, id: req.userID, message: "Authenticated"});
-
 });
 
 //Post route to receive request to join event.
-router.post("/events/join", function(req, res) { 
+router.post("/events/join", function(req, res) {
 
   var attendee = {
     userId: req.userID,
@@ -35,7 +36,7 @@ router.post("/events/join", function(req, res) {
     } else {
       db.Attendee.create(attendee).then(function (attendee) {
         res.json(attendee);
-      }); 
+      });
     }
   })
 
