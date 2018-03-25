@@ -4,7 +4,7 @@
 > Gather4Good is a web application that allows users to connect and create communities around social, political, and charitable causes by organizing and joining events.
 
 ## Heroku Link
--insert link here-
+https://thawing-taiga-59128.herokuapp.com/
 
 ## Built With
 * Materialize
