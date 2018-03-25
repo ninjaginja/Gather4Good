@@ -93,6 +93,12 @@ $(document).ready(function() {
     displayEventsByCause(causeId);
   });
 
+  $(".searchBtn").on("click", function() {
+    var causeId = $("#cause_dropdown").val();
+    console.log("cause id: " + causeId);
+    displayEventsByCause(causeId);
+  });
+
   function displayEventsByCause(causeId) {
     if (causeId == "All") {
       window.location.href = "/";

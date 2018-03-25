@@ -1,20 +1,36 @@
-  <!-- Image Gallery -->
-  <div class="slider">
-    <ul class="slides">
-      <!-- First Image -->
-      <li><img class="responsive-img" src="/assets/images/science_color.jpg"></li>
-      <!-- Second Image -->
-      <li><img class="responsive-img" src="/assets/images/protest-header_signs.jpg"></li>
-      <!-- Third Image -->
-      <li><img class="responsive-img" src="/assets/images/women.jpg"></li>
-      <!-- Fourth Image -->
-      <li><img class="responsive-img" src="/assets/images/immigrants.jpg"></li>
-      <!-- Fifth Image -->
-      <li><img class="responsive-img" src="/assets/images/fullpride.jpg"></li>
-    </ul>
-  </div>
+<!-- Image Gallery -->
+<div class="slider">
+  <ul class="slides">
+    <!-- First Image -->
+    <li><img class="responsive-img" src="/assets/images/science_color.jpg"></li>
+    <!-- Second Image -->
+    <li><img class="responsive-img" src="/assets/images/protest-header_signs.jpg"></li>
+    <!-- Third Image -->
+    <li><img class="responsive-img" src="/assets/images/women.jpg"></li>
+    <!-- Fourth Image -->
+    <li><img class="responsive-img" src="/assets/images/immigration.jpg"></li>
+    <!-- Fifth Image -->
+    <li><img class="responsive-img" src="/assets/images/fullpride.jpg"></li>
+  </ul>
+</div>
 <main>
-  <!-- Cause Buttons -->
+  {{!-- Cause Drop Down (Mobile-Only) --}}
+  <div class="row center cause-dropdown">
+    <div class="input-field col s10">
+      <select id="cause_dropdown">
+        <option value="" disabled selected> Select a Cause</option>
+          {{#each causes}}
+            {{>causes/cause-block}}
+          {{/each}}
+      </select>
+    </div>
+    {{!-- Search Icon --}}
+    <div class="input-field col s2" > 
+      <i class="material-icons searchBtn" style="margin-top: 10px">search</i>
+    </div>
+  </div>
+
+  <!-- Cause Buttons (Large Screen) -->
   <div class="btn-container center-align causes" style="margin-top: 20px; padding-bottom: 20px">
     {{#each causes}}
       {{>causes/cause-buttons}}
@@ -26,16 +42,20 @@
     <div class="col s12 m7">
     <!-- Header -->
     <h3 class="header center header-title" style="margin-bottom: 0;">Upcoming Events</h3>
-    <p style="font-size: 16px;  text-align: center; margin: 5px 0px 30px 0px;"><a href="/" style="color: #43b5b1;">VIEW ALL EVENTS</a></p>
+    <p class="view-all"><a href="/" class="view-all">VIEW ALL EVENTS</a></p>
 
-      <!-- Generate event cards via handlebars -->
-      {{#if events}}
+    <!-- Generate Event Cards via Handlebars -->
+    {{#if events}}
       {{#each events}}
         {{>events/event-block}}
       {{/each}}
-      {{else}}
+    {{!-- If There's No Events, Sorry Message --}}
+    {{else}}
       <h2 style="margin: 20px;" class="center">Sorry, no events for this cause!</h2>
-      {{/if}}
+    {{/if}}
+
+    {{!-- PAGINATION!!!! --}}
+    <ul class="pagination center"></ul>
 
     </div>
   </div>
