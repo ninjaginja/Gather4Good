@@ -8,7 +8,7 @@ router.get("/", function(req, res) {
   Promise.all([
     db.Event.findAll({
       // PAGINATION CODE!! LIMITS RESULTS
-      limit: 5,
+      // limit: 5,
       // END 
       include: [db.Cause],
       order: [
@@ -30,54 +30,29 @@ router.get("/", function(req, res) {
 });
 
 // PAGINATION CODE!! Result Page 2
-router.get("/?page=2", function(req, res) {
-  Promise.all([
-    db.Event.findAll({
-      limit: 5,
-      offset: 5,
-      include: [db.Cause],
-      order: [
-        ['id', 'DESC']
-      ]
-    }),
-    db.Cause.findAll()
-  ])
-  .then(function(data) {
-    // console.log("......");
-    // console.log(data[0]);
-    // console.log("......");
-    var data = {
-      events: data[0],
-      causes: data[1]
-    }
-    res.render('index', data)
-  });
-});
-
-// PAGINATION CODE!!!! Result Page 3
-router.get("/?page=3", function(req, res) {
-  Promise.all([
-    db.Event.findAll({
-      limit: 5,
-      offset: 10,
-      include: [db.Cause],
-      order: [
-        ['id', 'DESC']
-      ]
-    }),
-    db.Cause.findAll()
-  ])
-  .then(function(data) {
-    // console.log("......");
-    // console.log(data[0]);
-    // console.log("......");
-    var data = {
-      events: data[0],
-      causes: data[1]
-    }
-    res.render('index', data)
-  });
-});
+// router.get("/?page=2", function(req, res) {
+//   Promise.all([
+//     db.Event.findAll({
+//       limit: 5,
+//       offset: 5,
+//       include: [db.Cause],
+//       order: [
+//         ['id', 'DESC']
+//       ]
+//     }),
+//     db.Cause.findAll()
+//   ])
+//   .then(function(data) {
+//     // console.log("......");
+//     // console.log(data[0]);
+//     // console.log("......");
+//     var data = {
+//       events: data[0],
+//       causes: data[1]
+//     }
+//     res.render('index', data)
+//   });
+// });
 
 // END OF PAGINATION CODE!!!!
 

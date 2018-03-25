@@ -37,9 +37,9 @@ nav {
 }
 
 /* PAGINATION CODE!!! Active Page Color */
-.pagination li.active {
+/* .pagination li.active {
     background-color: #ffab40;
-}
+} */
 
 /* Cause Dropdown Initial Display None */
 .cause-dropdown{
