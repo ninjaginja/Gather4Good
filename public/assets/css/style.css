@@ -36,6 +36,10 @@ nav {
     background-color:#43b5b1;
 }
 
+.state {
+    width: 200px
+}
+
 /* PAGINATION CODE!!! Active Page Color */
 /* .pagination li.active {
     background-color: #ffab40;
