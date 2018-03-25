@@ -1,9 +1,10 @@
+{{!-- Creates Cards for Each Event for Landing Page --}}
 <div class="row">
 <div class="handlebars-events card horizontal hoverable">
 <div class="card-stacked">
   <div class="card-content">
     <!-- Title, Location, and Cause -->
-    <h4>{{title}} | <div style="margin-left: 20px;margin-bottom:20px; margin-top: 10px" class="chip right cause" value="{{CauseId}}">{{Cause.name}}</div><span class="location"> {{location_city}}, {{location_state}}</span></h4>
+    <h4>{{title}} | <div class="chip right cause" value="{{CauseId}}">{{Cause.name}}</div><span class="location"> {{location_city}}, {{location_state}}</span></h4>
     <!-- Date and Time -->
     <h5 id='date'>Date: {{date}} @ <span id='time'> {{time}}</span> </h5>
     <!-- Description -->
@@ -16,6 +17,7 @@
       {{location_street}}, {{location_city}}, {{location_state}} {{location_zip}}</span></h6>
   </div>
   <div class="card-action">
+    {{!-- Info Link --}}
     <a href="/event/{{id}}">More Info</a>
   </div>
 </div>

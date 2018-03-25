@@ -8,6 +8,7 @@
   {{!-- App Title --}}
 	<title>Gather4Good</title>
 
+
 <!-- Compiled and minified CSS (Materialize) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -33,13 +34,15 @@
 {{!-- Event Creation Javascript --}}
 <script type="text/javascript" src="/assets/js/event.js"></script>
 
+
+
 </head>
 <body>
 
 {{!-- Header HTML--}}
 <header>
   <!-- NavBar -->
-  <nav style="height: 70px">
+  <nav>
       <div class="nav-wrapper">
         <!-- Logo Image -->
         <a href="/" class="brand-logo"><img src="/assets/images/gather-box-logo-small.png"></a>
@@ -54,30 +57,13 @@
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href=""><i class="material-icons right" style="margin-right:-10px">clear</i></a></li>
-        <li><a href="">Organize An Event</a></li>
+        <li><a href="/create">Organize An Event</a></li>
         <li><a id="login-anchor-side" href="#modal1" class="modal-trigger">Login</a></li>
         <li><a id="reg-anchor-side" href="#modal1" class="modal-trigger">Sign Up</a></li>
         <li><a id="side-logout" class="logout">Logout</a></li>
       </ul>
     </div>
   </nav>
-
-  {{!-- <!-- Image Gallery -->
-  <div class="slider">
-    <ul class="slides">
-      <!-- First Image -->
-      <li><img class="responsive-img" src="/assets/images/science_color.jpg"></li>
-      <!-- Second Image -->
-      <li><img class="responsive-img" src="/assets/images/protest-header_signs.jpg"></li>
-      <!-- Third Image -->
-      <li><img class="responsive-img" src="/assets/images/women.jpg"></li>
-      <!-- Fourth Image -->
-      <li><img class="responsive-img" src="/assets/images/immigrants.jpg"></li>
-      <!-- Fifth Image -->
-      <li><img class="responsive-img" src="/assets/images/fullpride.jpg"></li>
-    </ul>
-  </div> --}}
-
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
@@ -124,7 +110,7 @@
     </div>
 
       <!-- Sign Up Tab -->
-      <div id="signup" class="col s12" style="margin-left:11px">
+      <div id="signup" class="col s12" style="margin-left: 11px">
         <!-- Section Header -->
         <h4>Enter Your Info</h4>
 
@@ -168,7 +154,7 @@
     <div id="error-msg"></div>
 
     <!-- Submit Button -->
-    <button id="submit-btn" style="margin-bottom:24px" class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
+    <button id="submit-btn" class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
   </div>
 </div>
 </header>
@@ -176,14 +162,15 @@
 {{{ body }}}
 
 <!-- Footer -->
-<footer class="page-footer" style="background-color:#43b5b1">
+<footer class="page-footer">
   <div class="footer-copyright" >
   <!-- Copyright -->
-  <div class="container" style="font-family: 'Rubik', sans-serif;">© 2018 The A Team
+  <div class="container">© 2018 The A Team
     <!-- Repo Link -->
-    <a class="grey-text text-lighten-4 right" href="https://github.com/ninjaginja/Gather4Good" style="font-family: 'Rubik', sans-serif;">GitHub Repo</a>
+    <a class="grey-text text-lighten-4 right" href="https://github.com/ninjaginja/Gather4Good">GitHub Repo</a>
   </div>
   </div>
 </footer>
+
 </body>
 </html>
