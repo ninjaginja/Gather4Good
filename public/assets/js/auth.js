@@ -9,6 +9,7 @@ $(document).ready(function() {
     console.log($(this).data("submit-type"));
 
     $("#error-msg").text("");
+    $("#email-format-err-msg, #pw-format-err-msg").text("");
 
     if($(this).data("submit-type") == "Login") {
       loginUser();
@@ -17,51 +18,69 @@ $(document).ready(function() {
     }
   });
 
-  //REGISTER NEW USER
-  function registerUser() {
-    var firstName = $("#first_name").val().trim();
-    var lastName = $("#last_name").val().trim();
-    var name = firstName + " " + lastName;
+  //****************** REGISTRATION LOGIC ****************************//
+
+  function retrieveRegFormData() {
+    // var firstName = $("#first_name").val().trim();
+    // var lastName = $("#last_name").val().trim();
+    // var name = firstName + " " + lastName;
 
     var newUser = {
-      name: name,
+      firstName: $("#first_name").val().trim(),
+      lastName: $("#last_name").val().trim(),
       email: $("#reg-email").val().trim(),
       password: $("#reg-password").val().trim()
     }
 
-    console.log(newUser);
+    return newUser;
+  }
+
+  function submitNewUserToDb(newUser) {
+
+    $.ajax({
+      method: "POST",
+      url: "/api/register",
+      data: newUser
+    })
+    .done(function(data) {
+      console.log(data);
+      localStorage.setItem("token", data.token);
+      var token = localStorage.getItem("token");
+      console.log(token);
+      hideLoginAndDismissModal();
+    })
+    .fail(function(response) {
+      console.log(typeof response);
+      console.log(response);
+      console.log(response.responseJSON.message);
+
+      if (response.responseJSON.message === "User already exists") {
+        setUserExistsDisplay();
+      }
+    });
+  }
+
+  //REGISTER NEW USER
+  function registerUser() {
+
+    var newUser = retrieveRegFormData();
+    console.log("New user BEFORE concat: " + newUser)
     //call validation fxn here - if true, execute rest of code
-    var validationStatus = validateUserAuthInput(newUser);
+    var validationStatus = validateUserAuthInput(newUser, validateRegInfoFormat);
+    console.log("Validation status in registerUser func: " + validationStatus);
 
-    if(!validationStatus) {
-      $("#error-msg").text("Please fill in all fields to register");
-    } else {
-
-      $.ajax({
-        method: "POST",
-        url: "/api/register",
-        data: newUser
-      })
-      .done(function(data) {
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        var token = localStorage.getItem("token");
-        console.log(token);
-        hideLoginAndDismissModal();
-      })
-      .fail(function(response) {
-        console.log(typeof response);
-        console.log(response);
-        console.log(response.responseJSON.message);
-
-        if (response.responseJSON.message === "User already exists") {
-          setUserExistsDisplay();
-        }
-      });
+    if(validationStatus) {
+      ['firstName', 'lastName'].forEach(e => delete newUser[e]);
+      newUser.name = $("#first_name").val().trim() + " " + $("#last_name").val().trim();
+      console.log("New user after concat: " + newUser)
+      submitNewUserToDb(newUser);
     }
+
   }
 
 //======================================
+
+//*******LOGIN FUNCTIONS *********?/
 
   function loginUser() {
     var credentials = {
@@ -179,6 +198,10 @@ $(document).ready(function() {
     console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   });
 
+  $("#login-anchor-modal, #login-anchor-side").on("click", function() {
+    $("#email-format-err-msg, #pw-format-err-msg").text("");
+  });
+
   //Dynamically toggles modal display to correct tab (login v. signup)
   $("#login-anchor-head, #reg-anchor-head, #login-anchor-side, #reg-anchor-side").on("click", function() {
 
@@ -213,9 +236,12 @@ $(document).ready(function() {
   });
 
 
-  function validateUserAuthInput(authObj) {
+  function validateUserAuthInput(authObj, callback) {
     var validated = true;
     var propertyArr = Object.keys(authObj);
+    //submitType var used to determine whether user is registering or logging in
+    var submitType = $("#submit-btn").data("submit-type");
+    console.log("Submit type in main validation function: " + submitType);
     console.log("auth property array:" + propertyArr);
 
     propertyArr.forEach(function(property) {
@@ -224,7 +250,53 @@ $(document).ready(function() {
       }
     });
 
+    if(validated && submitType == "Sign Up") {
+      //If no empty fields and user is registering, test email and pw format in cb
+      return callback(authObj);
+    } else if (validated && submitType != "Sign Up") {
+      // If no empty fields and user is not registering (i.e., just logging in)
+      // then just return true
+      return validated;
+    } else {
+      // If there are empty fields in form, set error display and return false
+      $("#error-msg").text("Please fill in all fields to register");
+      return validated;
+    }
+
+  }
+
+  function validateRegInfoFormat(authObj) {
+    console.log("validation callback called");
+    console.log("Value of auth obj inside validate Reg Info Format:");
+    console.log(authObj);
+    var validated = true;
+
+    if(!(testEmailFormat(authObj.email))) {
+      $("#email-format-err-msg").text("Please enter a valid email format");
+      validated = false;
+    }
+
+    if(!(testPasswordFormat(authObj.password)))  {
+      var errMsg = "Please enter a password that is at least 8 characters in length";
+      $("#pw-format-err-msg").text(errMsg);
+      validated = false;
+    }
+
     return validated;
+  }
+
+  //Regex to test for valid email format
+  function testEmailFormat(email) {
+    var result = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm.test(email);
+    console.log("Result of email format test: " + result);
+    return result;
+  }
+
+  //Test length of password
+  function testPasswordFormat(password) {
+    var result = password.length >= 8;
+    console.log("Result of email format test: " + result);
+    return result;
   }
 
 
