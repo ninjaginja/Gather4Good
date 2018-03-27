@@ -1,9 +1,19 @@
 $(document).ready(function() {
 
+  //Reference to elements that should toggle submit-btn data property
+  var anchors = "#login-anchor-head, #reg-anchor-head, " +
+                "#login-anchor-side, #reg-anchor-side, " +
+                "#login-anchor-modal, #reg-anchor-modal";
+
+
+  // Determine user auth status, set initial submit-btn data property,
+  // and initialize modal tabs
   determineAuthStatus();
   setSubmitBtnDefault();
   $('.tabs').tabs();
 
+
+  // Main event listener for registration and login
   $("#submit-btn").on("click", function(event) {
     event.preventDefault();
     console.log($(this).data("submit-type"));
@@ -18,12 +28,28 @@ $(document).ready(function() {
     }
   });
 
-  //****************** REGISTRATION LOGIC ****************************//
+
+
+  //********************** REGISTRATION LOGIC ********************************//
+
+  // Main registration function triggered on submit-btn on click
+  function registerUser() {
+    var newUser = retrieveRegFormData();
+    console.log("New user BEFORE concat: " + newUser)
+    //call validation fxn here - if true, execute rest of code
+    var validationStatus = validateUserAuthInput(newUser, validateRegInfoFormat);
+    console.log("Validation status in registerUser func: " + validationStatus);
+
+    if(validationStatus) {
+      ['firstName', 'lastName'].forEach(e => delete newUser[e]);
+      newUser.name = $("#first_name").val().trim() + " " + $("#last_name").val().trim();
+      console.log("New user after concat: " + newUser)
+      submitNewUserToDb(newUser);
+    }
+  }
+
 
   function retrieveRegFormData() {
-    // var firstName = $("#first_name").val().trim();
-    // var lastName = $("#last_name").val().trim();
-    // var name = firstName + " " + lastName;
 
     var newUser = {
       firstName: $("#first_name").val().trim(),
@@ -34,6 +60,7 @@ $(document).ready(function() {
 
     return newUser;
   }
+
 
   function submitNewUserToDb(newUser) {
 
@@ -60,28 +87,10 @@ $(document).ready(function() {
     });
   }
 
-  //REGISTER NEW USER
-  function registerUser() {
 
-    var newUser = retrieveRegFormData();
-    console.log("New user BEFORE concat: " + newUser)
-    //call validation fxn here - if true, execute rest of code
-    var validationStatus = validateUserAuthInput(newUser, validateRegInfoFormat);
-    console.log("Validation status in registerUser func: " + validationStatus);
+//***************** LOGIN AND AUTH STATUS LOGIC ******************************//
 
-    if(validationStatus) {
-      ['firstName', 'lastName'].forEach(e => delete newUser[e]);
-      newUser.name = $("#first_name").val().trim() + " " + $("#last_name").val().trim();
-      console.log("New user after concat: " + newUser)
-      submitNewUserToDb(newUser);
-    }
-
-  }
-
-//======================================
-
-//*******LOGIN FUNCTIONS *********?/
-
+  // Main function to log user in
   function loginUser() {
     var credentials = {
       email: $("#login-email").val().trim(),
@@ -89,41 +98,43 @@ $(document).ready(function() {
     }
 
     console.log(credentials);
-    var validationStatus = validateUserAuthInput(credentials);
+    var validationStatus = validateUserAuthInput(credentials, null);
 
-    if(!validationStatus) {
-      $("#error-msg").text("Please fill in all fields to login");
-    } else {
-
-      $.ajax({
-        method: "POST",
-        url: "/api/login",
-        data: credentials
-      })
-      .done(function(data) {
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        var token = localStorage.getItem("token");
-        console.log(token);
-        hideLoginAndDismissModal();
-      })
-      .fail(function(response) {
-        console.log(typeof response);
-        console.log(response);
-        console.log(response.responseJSON.message);
-
-        var message = response.responseJSON.message;
-
-        if(message === "Wrong password") {
-          $("#error-msg").text("Sorry, the password you entered is incorrect.");
-        } else if(message === "User not found") {
-          $("#error-msg").text("Sorry, we have no user registered with that email");
-        }
-
-      });
+    if(validationStatus) {
+      submitLoginToDb(credentials);
     }
+
   }
 
+
+  function submitLoginToDb(credentials) {
+
+    $.ajax({
+      method: "POST",
+      url: "/api/login",
+      data: credentials
+    })
+    .done(function(data) {
+      console.log(data);
+      localStorage.setItem("token", data.token);
+      var token = localStorage.getItem("token");
+      console.log(token);
+      hideLoginAndDismissModal();
+    })
+    .fail(function(response) {
+      console.log(typeof response);
+      console.log(response);
+      console.log(response.responseJSON.message);
+
+      var message = response.responseJSON.message;
+      setNoUserOrWrongPwDisplay(message);
+    });
+
+  }
+
+
+  // Function to be called on page load to determine whether user is logged-in
+  // If yes, hide login/register display and show logout. If no, display opposite
   function determineAuthStatus() {
     var token = localStorage.getItem("token");
 
@@ -141,12 +152,13 @@ $(document).ready(function() {
 
     $.ajax(ajaxSettings)
       .done(function (response) {
-        // console.log(response);
+
         if(response.message === "Authenticated") {
           hideLoginAndDismissModal();
         } else if (response.message === "Not authenticated") {
           showLoginAndHideLogout();
         }
+
       })
       .fail(function(response) {
         console.log(typeof response);
@@ -162,6 +174,11 @@ $(document).ready(function() {
       });
   }
 
+
+
+//***************** MAJOR AUTH MODAL DISPLAY LOGIC ***************************//
+
+  // Closes modal and clears input, hides login/reg display elements, shows logout
   function hideLoginAndDismissModal() {
     $(".modal-trigger").hide();
     $("#logout-head, #side-logout").show();
@@ -170,23 +187,35 @@ $(document).ready(function() {
     $("#login-email, #login-password").val("");
   }
 
+
+  // Shows login/reg display elements, hides logout
   function showLoginAndHideLogout() {
     $(".modal-trigger").show();
     $("#logout-head, #side-logout").hide();
   }
 
+  //Shows err msg on login attempt if password is wrong or no user found
+  function setNoUserOrWrongPwDisplay(message) {
+    if(message === "Wrong password") {
+      $("#error-msg").text("Sorry, the password you entered is incorrect.");
+    } else if(message === "User not found") {
+      $("#error-msg").text("Sorry, we have no user registered with that email");
+    }
+  }
+
+
+  // Sets display when user attempts to register an email already in our user table
   function setUserExistsDisplay() {
     $("#reg-email, #reg-password").val("");
     $("#error-msg").text("Sorry, but we already have an account registered with that email.")
   }
 
+
+  // Clears error-msg re empty input when user focuses on any modal input element
   $("#modal1 input").on("focus", function() {
     $("#error-msg").text("");
   });
 
-  var anchors = "#login-anchor-head, #reg-anchor-head, " +
-                "#login-anchor-side, #reg-anchor-side, " +
-                "#login-anchor-modal, #reg-anchor-modal";
 
   //Toggle error message display and set data attribute submit-btn to trigger
   //correct functionality (login v. register)
@@ -198,9 +227,12 @@ $(document).ready(function() {
     console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   });
 
+
+  //Clear text from err msg related to email or pw format
   $("#login-anchor-modal, #login-anchor-side").on("click", function() {
     $("#email-format-err-msg, #pw-format-err-msg").text("");
   });
+
 
   //Dynamically toggles modal display to correct tab (login v. signup)
   $("#login-anchor-head, #reg-anchor-head, #login-anchor-side, #reg-anchor-side").on("click", function() {
@@ -217,14 +249,17 @@ $(document).ready(function() {
 
   })
 
-  //Function called on page load to set the correct default btn submit-type
+
+  //Called on page load to set the correct default btn submit-type
   function setSubmitBtnDefault() {
     $("#submit-btn").data("submit-type", "Login");
-    // console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   }
 
-  //Logout functionality - destroy token in local storage
-  //and display sign/register options
+
+
+  //***************** LOGOUT AND TOKEN DESTRUCTION ***************************//
+
+  //On logout, destroy token in local storage and display sign/register option
   $("#logout-head, #side-logout").on("click", function(event) {
     event.preventDefault();
 
@@ -236,6 +271,11 @@ $(document).ready(function() {
   });
 
 
+
+  //*********************** VALIDATION FOR AUTH INPUT  ***********************//
+
+  // Checks if  data in all field. If data in all fields and registering,
+  // execute callback for additional formatting validation on email and pw
   function validateUserAuthInput(authObj, callback) {
     var validated = true;
     var propertyArr = Object.keys(authObj);
@@ -265,6 +305,8 @@ $(document).ready(function() {
 
   }
 
+
+  // Calls functions to validate email and pw format
   function validateRegInfoFormat(authObj) {
     console.log("validation callback called");
     console.log("Value of auth obj inside validate Reg Info Format:");
@@ -285,19 +327,20 @@ $(document).ready(function() {
     return validated;
   }
 
-  //Regex to test for valid email format
+
+  // Regex to test for valid email format
   function testEmailFormat(email) {
     var result = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm.test(email);
     console.log("Result of email format test: " + result);
     return result;
   }
 
-  //Test length of password
+
+  // Test length of password
   function testPasswordFormat(password) {
     var result = password.length >= 8;
     console.log("Result of email format test: " + result);
     return result;
   }
-
 
 });
