@@ -16,7 +16,7 @@ $(document).ready(function(){
   // } else {
   //   $('.page1').addClass('active');
   // }
-  
+
 // End PAGINATION Code!!!!!!
 
 
@@ -44,7 +44,7 @@ $(document).ready(function(){
     close: 'Ok',
     closeOnSelect: false // Close upon selecting a date,
   });
-  
+
   // Image Gallery
   $('.slider').slider({
     indicators: false,
