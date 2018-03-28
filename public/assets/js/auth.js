@@ -1,11 +1,5 @@
 $(document).ready(function() {
 
-  //Reference to elements that should toggle submit-btn data property
-  var anchors = "#login-anchor-head, #reg-anchor-head, " +
-                "#login-anchor-side, #reg-anchor-side, " +
-                "#login-anchor-modal, #reg-anchor-modal";
-
-
   // Determine user auth status, set initial submit-btn data property,
   // and initialize modal tabs
   determineAuthStatus();
@@ -16,9 +10,8 @@ $(document).ready(function() {
   // Main event listener for registration and login
   $("#submit-btn").on("click", function(event) {
     event.preventDefault();
-    console.log($(this).data("submit-type"));
 
-    $("#error-msg").text("");
+    $("#main-err-msg").text("");
     $("#email-format-err-msg, #pw-format-err-msg").text("");
 
     if($(this).data("submit-type") == "Login") {
@@ -35,15 +28,11 @@ $(document).ready(function() {
   // Main registration function triggered on submit-btn on click
   function registerUser() {
     var newUser = retrieveRegFormData();
-    console.log("New user BEFORE concat: " + newUser)
-    //call validation fxn here - if true, execute rest of code
     var validationStatus = validateUserAuthInput(newUser, validateRegInfoFormat);
-    console.log("Validation status in registerUser func: " + validationStatus);
 
     if(validationStatus) {
       ['firstName', 'lastName'].forEach(e => delete newUser[e]);
       newUser.name = $("#first_name").val().trim() + " " + $("#last_name").val().trim();
-      console.log("New user after concat: " + newUser)
       submitNewUserToDb(newUser);
     }
   }
@@ -103,7 +92,6 @@ $(document).ready(function() {
     if(validationStatus) {
       submitLoginToDb(credentials);
     }
-
   }
 
 
@@ -197,9 +185,9 @@ $(document).ready(function() {
   //Shows err msg on login attempt if password is wrong or no user found
   function setNoUserOrWrongPwDisplay(message) {
     if(message === "Wrong password") {
-      $("#error-msg").text("Sorry, the password you entered is incorrect.");
+      $("#main-err-msg").text("Sorry, the password you entered is incorrect.");
     } else if(message === "User not found") {
-      $("#error-msg").text("Sorry, we have no user registered with that email");
+      $("#main-err-msg").text("Sorry, we have no user registered with that email");
     }
   }
 
@@ -207,20 +195,20 @@ $(document).ready(function() {
   // Sets display when user attempts to register an email already in our user table
   function setUserExistsDisplay() {
     $("#reg-email, #reg-password").val("");
-    $("#error-msg").text("Sorry, but we already have an account registered with that email.")
+    $("#main-err-msg").text("Sorry, but we already have an account registered with that email.")
   }
 
 
   // Clears error-msg re empty input when user focuses on any modal input element
   $("#modal1 input").on("focus", function() {
-    $("#error-msg").text("");
+    $("#main-err-msg").text("");
   });
 
 
   //Toggle error message display and set data attribute submit-btn to trigger
   //correct functionality (login v. register)
-  $(anchors).on("click", function() {
-    $("#error-msg").text("");
+  $(".submit-change-trigger").on("click", function() {
+    $("#main-err-msg").text("");
     console.log($(this).text());
 
     $("#submit-btn").data("submit-type", $(this).text());
@@ -235,7 +223,7 @@ $(document).ready(function() {
 
 
   //Dynamically toggles modal display to correct tab (login v. signup)
-  $("#login-anchor-head, #reg-anchor-head, #login-anchor-side, #reg-anchor-side").on("click", function() {
+  $(".modal-trigger").on("click", function() {
 
     if($(this).text() == "Sign Up") {
       setTimeout(function() {
@@ -299,7 +287,7 @@ $(document).ready(function() {
       return validated;
     } else {
       // If there are empty fields in form, set error display and return false
-      $("#error-msg").text("Please fill in all fields to register");
+      $("#main-err-msg").text("Please fill in all fields to register");
       return validated;
     }
 

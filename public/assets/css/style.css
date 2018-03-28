@@ -185,7 +185,7 @@ nav .brand-logo {
   display: none;
 }
 
-#error-msg,
+#main-err-msg,
 #email-format-err-msg,
 #pw-format-err-msg {
   color: red;

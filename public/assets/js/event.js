@@ -47,7 +47,7 @@ $(document).ready(function() {
         }
 
         $(".modal-trigger").show();
-        $("#error-msg").text("Please login before submitting your events");
+        $("#main-err-msg").text("Please login before submitting your events");
         $("#modal1").modal("open");
       });
   }
@@ -187,7 +187,7 @@ $(document).ready(function() {
         }
 
         $(".modal-trigger").show();
-        $("#error-msg").text("Please login before joining an event");
+        $("#main-err-msg").text("Please login before joining an event");
         $("#modal1").modal("open");
       });
   }
