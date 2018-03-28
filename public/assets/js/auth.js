@@ -59,17 +59,10 @@ $(document).ready(function() {
       data: newUser
     })
     .done(function(data) {
-      console.log(data);
       localStorage.setItem("token", data.token);
-      var token = localStorage.getItem("token");
-      console.log(token);
       hideLoginAndDismissModal();
     })
     .fail(function(response) {
-      console.log(typeof response);
-      console.log(response);
-      console.log(response.responseJSON.message);
-
       if (response.responseJSON.message === "User already exists") {
         setUserExistsDisplay();
       }
@@ -85,8 +78,6 @@ $(document).ready(function() {
       email: $("#login-email").val().trim(),
       password: $("#login-password").val().trim()
     }
-
-    console.log(credentials);
     var validationStatus = validateUserAuthInput(credentials, null);
 
     if(validationStatus) {
@@ -95,6 +86,7 @@ $(document).ready(function() {
   }
 
 
+  // Submit user's login credentials to server/db to be authenicated
   function submitLoginToDb(credentials) {
 
     $.ajax({
@@ -103,17 +95,10 @@ $(document).ready(function() {
       data: credentials
     })
     .done(function(data) {
-      console.log(data);
       localStorage.setItem("token", data.token);
-      var token = localStorage.getItem("token");
-      console.log(token);
       hideLoginAndDismissModal();
     })
     .fail(function(response) {
-      console.log(typeof response);
-      console.log(response);
-      console.log(response.responseJSON.message);
-
       var message = response.responseJSON.message;
       setNoUserOrWrongPwDisplay(message);
     });
@@ -149,15 +134,11 @@ $(document).ready(function() {
 
       })
       .fail(function(response) {
-        console.log(typeof response);
-        console.log(response);
-        console.log(response.responseJSON.message);
 
         if(response.responseJSON.message === "Token expired") {
           localStorage.removeItem("token");
         }
 
-        console.log("No credentials homie. Might need to login. Show login and reg ish.")
         showLoginAndHideLogout();
       });
   }
@@ -166,7 +147,7 @@ $(document).ready(function() {
 
 //***************** MAJOR AUTH MODAL DISPLAY LOGIC ***************************//
 
-  // Closes modal and clears input, hides login/reg display elements, shows logout
+  //Closes modal and clears input, hides login/reg display elements, shows logout
   function hideLoginAndDismissModal() {
     $(".modal-trigger").hide();
     $("#logout-head, #side-logout").show();
@@ -176,7 +157,7 @@ $(document).ready(function() {
   }
 
 
-  // Shows login/reg display elements, hides logout
+  //Shows login/reg display elements, hides logout
   function showLoginAndHideLogout() {
     $(".modal-trigger").show();
     $("#logout-head, #side-logout").hide();
@@ -192,7 +173,7 @@ $(document).ready(function() {
   }
 
 
-  // Sets display when user attempts to register an email already in our user table
+  //Sets display when user attempts to register an email already in our user table
   function setUserExistsDisplay() {
     $("#reg-email, #reg-password").val("");
     $("#main-err-msg").text("Sorry, but we already have an account registered with that email.")
@@ -209,10 +190,7 @@ $(document).ready(function() {
   //correct functionality (login v. register)
   $(".submit-change-trigger").on("click", function() {
     $("#main-err-msg").text("");
-    console.log($(this).text());
-
     $("#submit-btn").data("submit-type", $(this).text());
-    console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   });
 
 
@@ -267,10 +245,7 @@ $(document).ready(function() {
   function validateUserAuthInput(authObj, callback) {
     var validated = true;
     var propertyArr = Object.keys(authObj);
-    //submitType var used to determine whether user is registering or logging in
     var submitType = $("#submit-btn").data("submit-type");
-    console.log("Submit type in main validation function: " + submitType);
-    console.log("auth property array:" + propertyArr);
 
     propertyArr.forEach(function(property) {
       if(!authObj[property] || authObj[property] == " ") {
@@ -290,15 +265,11 @@ $(document).ready(function() {
       $("#main-err-msg").text("Please fill in all fields to register");
       return validated;
     }
-
   }
 
 
   // Calls functions to validate email and pw format
   function validateRegInfoFormat(authObj) {
-    console.log("validation callback called");
-    console.log("Value of auth obj inside validate Reg Info Format:");
-    console.log(authObj);
     var validated = true;
 
     if(!(testEmailFormat(authObj.email))) {
@@ -319,7 +290,7 @@ $(document).ready(function() {
   // Regex to test for valid email format
   function testEmailFormat(email) {
     var result = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm.test(email);
-    console.log("Result of email format test: " + result);
+    //console.log("Result of email format test: " + result);
     return result;
   }
 
@@ -327,7 +298,7 @@ $(document).ready(function() {
   // Test length of password
   function testPasswordFormat(password) {
     var result = password.length >= 8;
-    console.log("Result of email format test: " + result);
+    //console.log("Result of email format test: " + result);
     return result;
   }
 

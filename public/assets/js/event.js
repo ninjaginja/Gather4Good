@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-  // console.log(localStorage.getItem("token"));
-
   // Retrieve data from form to create new event object
   // To be called on click of form submit btn
   function retrieveEventData() {
@@ -29,19 +27,9 @@ $(document).ready(function() {
   function createNewEvent(newEventSettings) {
     $.ajax(newEventSettings)
       .done(function(response) {
-        console.log(response);
-        console.log("TEST: " + response.id);
-        // console.log(response.id);
-        // $.get("/event/" + response.id, function(err) {
-        //   if(err) throw err;
-        // })
         window.location.href = "/event/" + response.id;
       })
       .fail(function(response) {
-        console.log(typeof response);
-        console.log(response);
-        console.log(response.responseJSON.message);
-
         if(response.responseJSON.message === "Token expired") {
           localStorage.removeItem("token");
         }
@@ -57,9 +45,6 @@ $(document).ready(function() {
     event.preventDefault();
     var token = localStorage.getItem("token");
     var newEvent = retrieveEventData();
-
-    // console.log(token);
-    // console.log(newEvent);
 
     var newEventSettings = {
         "async": true,
@@ -89,13 +74,11 @@ $(document).ready(function() {
   //On click event listener to render display of events by specific cause
   $(".causeBtn").on("click", function() {
     var causeId = $(this).data("cause-id");
-    console.log("cause id: " + causeId);
     displayEventsByCause(causeId);
   });
 
   $(".searchBtn").on("click", function() {
     var causeId = $("#cause_dropdown").val();
-    console.log("cause id: " + causeId);
     displayEventsByCause(causeId);
   });
 
@@ -113,14 +96,9 @@ $(document).ready(function() {
 
     var validated = true;
     var objToValidate = Object.assign({}, eventObj);
-    ['img_url', 'location_name'].forEach(e => delete objToValidate[e]);
 
-    console.log("New Object to validate:");
-    console.log(objToValidate);
-    console.log("Old object:");
-    console.log(eventObj);
+    ['img_url', 'location_name'].forEach(e => delete objToValidate[e]);
     var propertyArr = Object.keys(objToValidate);
-    console.log("property array:" + propertyArr);
 
     propertyArr.forEach(function(property) {
       if(!eventObj[property] || eventObj[property] == " ") {
@@ -134,7 +112,6 @@ $(document).ready(function() {
   // Event listener to hide error msg re event form submission
   $("input, textarea").on("focus", function(event) {
     event.preventDefault();
-    console.log("input focus called");
     $("#incomplete-form-msg").hide();
   })
 
@@ -142,11 +119,10 @@ $(document).ready(function() {
   //listener on join button, sends post request to server to join event.
   $(".joinBtn").on("click", function() {
 
-    var event = {
-      id: $(this).data("id")
-      };
     var token = localStorage.getItem("token");
-    // console.log("Event Id: " + event);
+    var event = {
+        id: $(this).data("id")
+      };
 
     var Settings = {
       "async": true,
@@ -168,6 +144,7 @@ $(document).ready(function() {
   function joinEvent(Settings) {
     $.ajax(Settings)
       .done(function (response) {
+
         if(!response) {
           Materialize.toast('You are already going to this event!', 4000);
         } else {
@@ -176,12 +153,9 @@ $(document).ready(function() {
             window.location.reload();
           }, 5000)
         }
+
       })
       .fail(function (response) {
-        console.log(typeof response);
-        console.log(response);
-        console.log(response.responseJSON.message);
-
         if (response.responseJSON.message === "Token expired") {
           localStorage.removeItem("token");
         }
