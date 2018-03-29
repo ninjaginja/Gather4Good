@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
-  // Determine user auth status, set initial submit-btn data property,
+  // Determine user auth status and set initial submit-btn data property,
   // and initialize modal tabs
   determineAuthStatus();
   setSubmitBtnDefault();
-  $('.tabs').tabs();
+  //$('.tabs').tabs();
 
 
   // Main event listener for registration and login
@@ -145,7 +145,8 @@ $(document).ready(function() {
 
 
 
-//***************** MAJOR AUTH MODAL DISPLAY LOGIC ***************************//
+//********************* AUTH MODAL DISPLAY LOGIC *****************************//
+// [See client.js for basic modal setup and functionality]
 
   //Closes modal and clears input, hides login/reg display elements, shows logout
   function hideLoginAndDismissModal() {
@@ -202,19 +203,21 @@ $(document).ready(function() {
 
 
   //Dynamically toggles modal display to correct tab (login v. signup)
-  $(".modal-trigger").on("click", function() {
-
-    if($(this).text() == "Sign Up") {
-      setTimeout(function() {
-        $('ul.tabs').tabs('select_tab', "signup");
-      }, 300);
-    } else {
-      setTimeout(function() {
-        $('ul.tabs').tabs('select_tab', "login");
-      }, 300);
-    }
-
-  })
+  //THIS HAS BEEN MODIFIED AND ADDED TO CLIENT.JS SO TAB IS ALWAYS CALLED
+  //ON MODAL OPEN
+  // $(".modal-trigger").on("click", function() {
+  //
+  //   if($(this).text() == "Sign Up") {
+  //     setTimeout(function() {
+  //       $('ul.tabs').tabs('select_tab', "signup");
+  //     }, 300);
+  //   } else {
+  //     setTimeout(function() {
+  //       $('ul.tabs').tabs('select_tab', "login");
+  //     }, 300);
+  //   }
+  //
+  // })
 
 
   //Called on page load to set the correct default btn submit-type
