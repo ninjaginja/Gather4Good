@@ -152,7 +152,8 @@ $(document).ready(function() {
     $(".modal-trigger").hide();
     $("#logout-head, #side-logout").show();
     $("#modal1").modal("close");
-    $("#first_name, #last_name, #reg-email, #reg-password").val("");
+    $("#signup input").val("");
+    //$("#first_name, #last_name, #reg-email, #reg-password").val("");
     $("#login-email, #login-password").val("");
   }
 
