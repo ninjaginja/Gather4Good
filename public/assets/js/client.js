@@ -84,7 +84,10 @@ $(document).ready(function(){
   function clearModalInput() {
     $("#login input").val("").removeClass("valid invalid");
     $("#signup input").val("").removeClass("valid invalid");
-    $("label").removeClass("active");
+    $("#login label, #signup label").removeClass("active");
+    $("#main-err-msg").text("");
+    $("#email-format-err-msg").text("");
+    $("#pw-format-err-msg").hide();
   }
 
 

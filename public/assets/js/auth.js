@@ -1,10 +1,8 @@
 $(document).ready(function() {
 
   // Determine user auth status and set initial submit-btn data property,
-  // and initialize modal tabs
   determineAuthStatus();
   setSubmitBtnDefault();
-  //$('.tabs').tabs();
 
 
   // Main event listener for registration and login
@@ -12,7 +10,8 @@ $(document).ready(function() {
     event.preventDefault();
 
     $("#main-err-msg").text("");
-    $("#email-format-err-msg, #pw-format-err-msg").text("");
+    $("#email-format-err-msg").text("");
+    $("#pw-format-err-msg").hide();
 
     if($(this).data("submit-type") == "Login") {
       loginUser();
@@ -44,7 +43,7 @@ $(document).ready(function() {
       firstName: $("#first_name").val().trim(),
       lastName: $("#last_name").val().trim(),
       email: $("#reg-email").val().trim(),
-      password: $("#reg-password").val().trim()
+      password: $("#reg-password").val()
     }
 
     return newUser;
@@ -76,7 +75,7 @@ $(document).ready(function() {
   function loginUser() {
     var credentials = {
       email: $("#login-email").val().trim(),
-      password: $("#login-password").val().trim()
+      password: $("#login-password").val()
     }
     var validationStatus = validateUserAuthInput(credentials, null);
 
@@ -153,9 +152,6 @@ $(document).ready(function() {
     $(".modal-trigger").hide();
     $("#logout-head, #side-logout").show();
     $("#modal1").modal("close");
-    $("#signup input").val("");
-    //$("#first_name, #last_name, #reg-email, #reg-password").val("");
-    $("#login-email, #login-password").val("");
   }
 
 
@@ -177,7 +173,9 @@ $(document).ready(function() {
 
   //Sets display when user attempts to register an email already in our user table
   function setUserExistsDisplay() {
-    $("#reg-email, #reg-password").val("");
+    $("#reg-email, #reg-password").val("").removeClass("valid invalid");
+    $("label[for='reg-email'], label[for='reg-password']").removeClass("active");
+    $("#pw-format-err-msg").hide();
     $("#main-err-msg").text("Sorry, but we already have an account registered with that email.")
   }
 
@@ -196,28 +194,11 @@ $(document).ready(function() {
   });
 
 
-  //Clear text from err msg related to email or pw format
+  //Clears/hides err msgs related to email or pw format
   $("#login-anchor-modal, #login-anchor-side").on("click", function() {
-    $("#email-format-err-msg, #pw-format-err-msg").text("");
+    $("#email-format-err-msg").text("");
+    $("#pw-format-err-msg").hide();
   });
-
-
-  //Dynamically toggles modal display to correct tab (login v. signup)
-  //THIS HAS BEEN MODIFIED AND ADDED TO CLIENT.JS SO TAB IS ALWAYS CALLED
-  //ON MODAL OPEN
-  // $(".modal-trigger").on("click", function() {
-  //
-  //   if($(this).text() == "Sign Up") {
-  //     setTimeout(function() {
-  //       $('ul.tabs').tabs('select_tab', "signup");
-  //     }, 300);
-  //   } else {
-  //     setTimeout(function() {
-  //       $('ul.tabs').tabs('select_tab', "login");
-  //     }, 300);
-  //   }
-  //
-  // })
 
 
   //Called on page load to set the correct default btn submit-type
@@ -277,13 +258,12 @@ $(document).ready(function() {
     var validated = true;
 
     if(!(testEmailFormat(authObj.email))) {
-      $("#email-format-err-msg").text("Please enter a valid email format");
+      $("#email-format-err-msg").text("* Please enter a valid email format");
       validated = false;
     }
 
     if(!(testPasswordFormat(authObj.password)))  {
-      var errMsg = "Please enter a password that is at least 8 characters in length";
-      $("#pw-format-err-msg").text(errMsg);
+      $("#pw-format-err-msg").show();
       validated = false;
     }
 
@@ -293,7 +273,7 @@ $(document).ready(function() {
 
   // Regex to test for valid email format
   function testEmailFormat(email) {
-    var result = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm.test(email);
+    var result = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i.test(email);
     //console.log("Result of email format test: " + result);
     return result;
   }
@@ -301,7 +281,7 @@ $(document).ready(function() {
 
   // Test length of password
   function testPasswordFormat(password) {
-    var result = password.length >= 8;
+    var result = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])\S{8,}$/.test(password);
     //console.log("Result of email format test: " + result);
     return result;
   }

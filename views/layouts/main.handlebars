@@ -28,11 +28,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 {{!-- Client Side Javascript --}}
-<script type="text/javascript" src="/assets/js/client.js" ></script>
+<script type="text/javascript" src="/assets/js/client.js" defer></script>
 {{!-- Authentication Javascript --}}
-<script type="text/javascript" src="/assets/js/auth.js" ></script>
+<script type="text/javascript" src="/assets/js/auth.js" defer></script>
 {{!-- Event Creation Javascript --}}
-<script type="text/javascript" src="/assets/js/event.js"></script>
+<script type="text/javascript" src="/assets/js/event.js" defer></script>
 
 
 
@@ -153,7 +153,13 @@
     <!-- Error Display -->
     <div id="main-err-msg"></div>
     <div id="email-format-err-msg"></div>
-    <div id="pw-format-err-msg"></div>
+    <ul id="pw-format-err-msg"> * Invalid password format. Password must contain:
+      <li>At least 8 characters</li>
+      <li>No spaces</li>
+      <li>A lowercase letter (a-z)</li>
+      <li>An uppercase letter (A-Z)</li>
+      <li>A number (0-9)</li>
+    </ul>
 
     <!-- Submit Button -->
     <button id="submit-btn" class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
