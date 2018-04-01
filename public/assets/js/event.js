@@ -35,8 +35,11 @@ $(document).ready(function() {
         }
 
         $(".modal-trigger").show();
-        $("#main-err-msg").text("Please login before submitting your events");
         $("#modal1").modal("open");
+
+        setTimeout(function() {
+          $("#main-err-msg").text("Please login or register before submitting an event");
+        }, 400);
       });
   }
 
@@ -60,7 +63,6 @@ $(document).ready(function() {
     }
 
     validationStatus = validateForm(newEvent);
-    console.log("Validation status: " +  validationStatus);
 
     if (!validationStatus) {
       $("#incomplete-form-msg").show();
@@ -161,8 +163,11 @@ $(document).ready(function() {
         }
 
         $(".modal-trigger").show();
-        $("#main-err-msg").text("Please login before joining an event");
         $("#modal1").modal("open");
+
+        setTimeout(function() {
+          $("#main-err-msg").text("Please login or register before joining an event");
+        }, 400);
       });
   }
 

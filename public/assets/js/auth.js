@@ -37,21 +37,21 @@ $(document).ready(function() {
   }
 
 
+  // Retrieves user info entered for registration
   function retrieveRegFormData() {
-
     var newUser = {
       firstName: $("#first_name").val().trim(),
       lastName: $("#last_name").val().trim(),
       email: $("#reg-email").val().trim(),
       password: $("#reg-password").val()
     }
-
     return newUser;
   }
 
 
+  // Submits registration info to query against users in db - if OK, add user.
+  // If not OK (i.e., email already exists), display error msg
   function submitNewUserToDb(newUser) {
-
     $.ajax({
       method: "POST",
       url: "/api/register",
@@ -87,7 +87,6 @@ $(document).ready(function() {
 
   // Submit user's login credentials to server/db to be authenicated
   function submitLoginToDb(credentials) {
-
     $.ajax({
       method: "POST",
       url: "/api/login",
@@ -101,7 +100,6 @@ $(document).ready(function() {
       var message = response.responseJSON.message;
       setNoUserOrWrongPwDisplay(message);
     });
-
   }
 
 
@@ -161,12 +159,13 @@ $(document).ready(function() {
     $("#logout-head, #side-logout").hide();
   }
 
+
   //Shows err msg on login attempt if password is wrong or no user found
   function setNoUserOrWrongPwDisplay(message) {
     if(message === "Wrong password") {
-      $("#main-err-msg").text("Sorry, the password you entered is incorrect.");
+      $("#main-err-msg").text("Sorry, the password you entered is incorrect. Try again.");
     } else if(message === "User not found") {
-      $("#main-err-msg").text("Sorry, we have no user registered with that email");
+      $("#main-err-msg").text("We found no user registered with that email. If you are a new user, signup to create an event!");
     }
   }
 
@@ -176,22 +175,29 @@ $(document).ready(function() {
     $("#reg-email, #reg-password").val("").removeClass("valid invalid");
     $("label[for='reg-email'], label[for='reg-password']").removeClass("active");
     $("#pw-format-err-msg").hide();
-    $("#main-err-msg").text("Sorry, but we already have an account registered with that email.")
+    $("#main-err-msg").text("Sorry, but we already have an account registered with that email. If you are the user associated with that email, proceed to login.")
   }
 
 
-  // Clears error-msg re empty input when user focuses on any modal input element
+  //Clears err-msgs when user focuses on any modal input element
   $("#modal1 input").on("focus", function() {
     $("#main-err-msg").text("");
+    $("#email-format-err-msg").text("");
+    $("#pw-format-err-msg").hide();
   });
 
 
-  //Toggle error message display and set data attribute submit-btn to trigger
+  //Set data attribute submit-btn to trigger
   //correct functionality (login v. register)
   $(".submit-change-trigger").on("click", function() {
-    $("#main-err-msg").text("");
     $("#submit-btn").data("submit-type", $(this).text());
   });
+
+
+  //Clears main-error-msg on click of modal tab
+  $("#login-anchor-modal, #reg-anchor-modal").on("click", function() {
+    $("#main-err-msg").text("");
+  })
 
 
   //Clears/hides err msgs related to email or pw format
