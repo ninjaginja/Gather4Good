@@ -9,7 +9,7 @@ router.get("/", function(req, res) {
     db.Event.findAll({
       // PAGINATION CODE!! LIMITS RESULTS
       // limit: 5,
-      // END 
+      // END
       include: [db.Cause],
       order: [
         ['id', 'DESC']

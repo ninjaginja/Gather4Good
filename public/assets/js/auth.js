@@ -1,14 +1,17 @@
 $(document).ready(function() {
 
+  // Determine user auth status and set initial submit-btn data property,
   determineAuthStatus();
   setSubmitBtnDefault();
-  $('.tabs').tabs();
 
+
+  // Main event listener for registration and login
   $("#submit-btn").on("click", function(event) {
     event.preventDefault();
-    console.log($(this).data("submit-type"));
 
-    $("#error-msg").text("");
+    $("#main-err-msg").text("");
+    $("#email-format-err-msg").text("");
+    $("#pw-format-err-msg").hide();
 
     if($(this).data("submit-type") == "Login") {
       loginUser();
@@ -17,94 +20,91 @@ $(document).ready(function() {
     }
   });
 
-  //REGISTER NEW USER
+
+
+  //********************** REGISTRATION LOGIC ********************************//
+
+  // Main registration function triggered on submit-btn on click
   function registerUser() {
-    var firstName = $("#first_name").val().trim();
-    var lastName = $("#last_name").val().trim();
-    var name = firstName + " " + lastName;
+    var newUser = retrieveRegFormData();
+    var validationStatus = validateUserAuthInput(newUser, validateRegInfoFormat);
 
-    var newUser = {
-      name: name,
-      email: $("#reg-email").val().trim(),
-      password: $("#reg-password").val().trim()
-    }
-
-    console.log(newUser);
-    //call validation fxn here - if true, execute rest of code
-    var validationStatus = validateUserAuthInput(newUser);
-
-    if(!validationStatus) {
-      $("#error-msg").text("Please fill in all fields to register");
-    } else {
-
-      $.ajax({
-        method: "POST",
-        url: "/api/register",
-        data: newUser
-      })
-      .done(function(data) {
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        var token = localStorage.getItem("token");
-        console.log(token);
-        hideLoginAndDismissModal();
-      })
-      .fail(function(response) {
-        console.log(typeof response);
-        console.log(response);
-        console.log(response.responseJSON.message);
-
-        if (response.responseJSON.message === "User already exists") {
-          setUserExistsDisplay();
-        }
-      });
+    if(validationStatus) {
+      ['firstName', 'lastName'].forEach(e => delete newUser[e]);
+      newUser.name = $("#first_name").val().trim() + " " + $("#last_name").val().trim();
+      submitNewUserToDb(newUser);
     }
   }
 
-//======================================
 
+  // Retrieves user info entered for registration
+  function retrieveRegFormData() {
+    var newUser = {
+      firstName: $("#first_name").val().trim(),
+      lastName: $("#last_name").val().trim(),
+      email: $("#reg-email").val().trim(),
+      password: $("#reg-password").val()
+    }
+    return newUser;
+  }
+
+
+  // Submits registration info to query against users in db - if OK, add user.
+  // If not OK (i.e., email already exists), display error msg
+  function submitNewUserToDb(newUser) {
+    $.ajax({
+      method: "POST",
+      url: "/api/register",
+      data: newUser
+    })
+    .done(function(data) {
+      localStorage.setItem("token", data.token);
+      hideLoginAndDismissModal();
+    })
+    .fail(function(response) {
+      if (response.responseJSON.message === "User already exists") {
+        setUserExistsDisplay();
+      }
+    });
+  }
+
+
+//***************** LOGIN AND AUTH STATUS LOGIC ******************************//
+
+  // Main function to log user in
   function loginUser() {
     var credentials = {
       email: $("#login-email").val().trim(),
-      password: $("#login-password").val().trim()
+      password: $("#login-password").val()
     }
+    var validationStatus = validateUserAuthInput(credentials, null);
 
-    console.log(credentials);
-    var validationStatus = validateUserAuthInput(credentials);
-
-    if(!validationStatus) {
-      $("#error-msg").text("Please fill in all fields to login");
-    } else {
-
-      $.ajax({
-        method: "POST",
-        url: "/api/login",
-        data: credentials
-      })
-      .done(function(data) {
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        var token = localStorage.getItem("token");
-        console.log(token);
-        hideLoginAndDismissModal();
-      })
-      .fail(function(response) {
-        console.log(typeof response);
-        console.log(response);
-        console.log(response.responseJSON.message);
-
-        var message = response.responseJSON.message;
-
-        if(message === "Wrong password") {
-          $("#error-msg").text("Sorry, the password you entered is incorrect.");
-        } else if(message === "User not found") {
-          $("#error-msg").text("Sorry, we have no user registered with that email");
-        }
-
-      });
+    if(validationStatus) {
+      submitLoginToDb(credentials);
     }
   }
 
+
+  // Submit user's login credentials to server/db to be authenicated
+  function submitLoginToDb(credentials) {
+    $.ajax({
+      method: "POST",
+      url: "/api/login",
+      data: credentials
+    })
+    .done(function(data) {
+      localStorage.setItem("token", data.token);
+      hideLoginAndDismissModal();
+    })
+    .fail(function(response) {
+      var message = response.responseJSON.message;
+      setNoUserOrWrongPwDisplay(message);
+    });
+  }
+
+
+  // Function to be called on page load to determine whether user is logged-in
+  // If yes, hide login/register display and show logout. If no, display opposite
   function determineAuthStatus() {
     var token = localStorage.getItem("token");
 
@@ -122,86 +122,101 @@ $(document).ready(function() {
 
     $.ajax(ajaxSettings)
       .done(function (response) {
-        // console.log(response);
+
         if(response.message === "Authenticated") {
           hideLoginAndDismissModal();
         } else if (response.message === "Not authenticated") {
           showLoginAndHideLogout();
         }
+
       })
       .fail(function(response) {
-        console.log(typeof response);
-        console.log(response);
-        console.log(response.responseJSON.message);
 
         if(response.responseJSON.message === "Token expired") {
           localStorage.removeItem("token");
         }
 
-        console.log("No credentials homie. Might need to login. Show login and reg ish.")
         showLoginAndHideLogout();
       });
   }
 
+
+
+//********************* AUTH MODAL DISPLAY LOGIC *****************************//
+// [See client.js for basic modal setup and functionality]
+
+  //Closes modal and clears input, hides login/reg display elements, shows logout
   function hideLoginAndDismissModal() {
     $(".modal-trigger").hide();
     $("#logout-head, #side-logout").show();
     $("#modal1").modal("close");
-    $("#first_name, #last_name, #reg-email, #reg-password").val("");
-    $("#login-email, #login-password").val("");
   }
 
+
+  //Shows login/reg display elements, hides logout
   function showLoginAndHideLogout() {
     $(".modal-trigger").show();
     $("#logout-head, #side-logout").hide();
   }
 
-  function setUserExistsDisplay() {
-    $("#reg-email, #reg-password").val("");
-    $("#error-msg").text("Sorry, but we already have an account registered with that email.")
+
+  //Shows err msg on login attempt if password is wrong or no user found
+  function setNoUserOrWrongPwDisplay(message) {
+    if(message === "Wrong password") {
+      $("#main-err-msg").text("Sorry, the password you entered is incorrect. Try again.");
+    } else if(message === "User not found") {
+      $("#main-err-msg").text("We found no user registered with that email. If you are a new user, signup to create an event!");
+    }
   }
 
+
+  //Sets display when user attempts to register an email already in our user table
+  function setUserExistsDisplay() {
+    $("#reg-email, #reg-password").val("").removeClass("valid invalid");
+    $("label[for='reg-email'], label[for='reg-password']").removeClass("active");
+    $("#pw-format-err-msg").hide();
+    $("#main-err-msg").text("Sorry, but we already have an account registered with that email. If you are the user associated with that email, proceed to login.")
+  }
+
+
+  //Clears err-msgs when user focuses on any modal input element
   $("#modal1 input").on("focus", function() {
-    $("#error-msg").text("");
+    $("#main-err-msg").text("");
+    $("#email-format-err-msg").text("");
+    $("#pw-format-err-msg").hide();
   });
 
-  var anchors = "#login-anchor-head, #reg-anchor-head, " +
-                "#login-anchor-side, #reg-anchor-side, " +
-                "#login-anchor-modal, #reg-anchor-modal";
 
-  //Toggle error message display and set data attribute submit-btn to trigger
+  //Set data attribute submit-btn to trigger
   //correct functionality (login v. register)
-  $(anchors).on("click", function() {
-    $("#error-msg").text("");
-    console.log($(this).text());
-
+  $(".submit-change-trigger").on("click", function() {
     $("#submit-btn").data("submit-type", $(this).text());
-    console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   });
 
-  //Dynamically toggles modal display to correct tab (login v. signup)
-  $("#login-anchor-head, #reg-anchor-head, #login-anchor-side, #reg-anchor-side").on("click", function() {
 
-    if($(this).text() == "Sign Up") {
-      setTimeout(function() {
-        $('ul.tabs').tabs('select_tab', "signup");
-      }, 300);
-    } else {
-      setTimeout(function() {
-        $('ul.tabs').tabs('select_tab', "login");
-      }, 300);
-    }
-
+  //Clears main-error-msg on click of modal tab
+  $("#login-anchor-modal, #reg-anchor-modal").on("click", function() {
+    $("#main-err-msg").text("");
   })
 
-  //Function called on page load to set the correct default btn submit-type
+
+  //Clears/hides err msgs related to email or pw format
+  $("#login-anchor-modal, #login-anchor-side").on("click", function() {
+    $("#email-format-err-msg").text("");
+    $("#pw-format-err-msg").hide();
+  });
+
+
+  //Called on page load to set the correct default btn submit-type
   function setSubmitBtnDefault() {
     $("#submit-btn").data("submit-type", "Login");
-    // console.log("submit-btn data", $("#submit-btn").data("submit-type"));
   }
 
-  //Logout functionality - destroy token in local storage
-  //and display sign/register options
+
+
+  //***************** LOGOUT AND TOKEN DESTRUCTION ***************************//
+
+  //On logout, destroy token in local storage and display sign/register option
   $("#logout-head, #side-logout").on("click", function(event) {
     event.preventDefault();
 
@@ -213,10 +228,15 @@ $(document).ready(function() {
   });
 
 
-  function validateUserAuthInput(authObj) {
+
+  //*********************** VALIDATION FOR AUTH INPUT  ***********************//
+
+  // Checks if  data in all field. If data in all fields and registering,
+  // execute callback for additional formatting validation on email and pw
+  function validateUserAuthInput(authObj, callback) {
     var validated = true;
     var propertyArr = Object.keys(authObj);
-    console.log("auth property array:" + propertyArr);
+    var submitType = $("#submit-btn").data("submit-type");
 
     propertyArr.forEach(function(property) {
       if(!authObj[property] || authObj[property] == " ") {
@@ -224,8 +244,52 @@ $(document).ready(function() {
       }
     });
 
+    if(validated && submitType == "Sign Up") {
+      //If no empty fields and user is registering, test email and pw format in cb
+      return callback(authObj);
+    } else if (validated && submitType != "Sign Up") {
+      // If no empty fields and user is not registering (i.e., just logging in)
+      // then just return true
+      return validated;
+    } else {
+      // If there are empty fields in form, set error display and return false
+      $("#main-err-msg").text("Please fill in all fields to register");
+      return validated;
+    }
+  }
+
+
+  // Calls functions to validate email and pw format
+  function validateRegInfoFormat(authObj) {
+    var validated = true;
+
+    if(!(testEmailFormat(authObj.email))) {
+      $("#email-format-err-msg").text("* Please enter a valid email format");
+      validated = false;
+    }
+
+    if(!(testPasswordFormat(authObj.password)))  {
+      $("#pw-format-err-msg").show();
+      validated = false;
+    }
+
     return validated;
   }
 
+
+  // Regex to test for valid email format
+  function testEmailFormat(email) {
+    var result = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i.test(email);
+    //console.log("Result of email format test: " + result);
+    return result;
+  }
+
+
+  // Test length of password
+  function testPasswordFormat(password) {
+    var result = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])\S{8,}$/.test(password);
+    //console.log("Result of email format test: " + result);
+    return result;
+  }
 
 });

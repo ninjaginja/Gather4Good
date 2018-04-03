@@ -16,9 +16,8 @@ $(document).ready(function(){
   // } else {
   //   $('.page1').addClass('active');
   // }
-  
-// End PAGINATION Code!!!!!!
 
+// End PAGINATION Code!!!!!!
 
   // Character Counter
   $('input#input_text, textarea#event_desription').characterCounter();
@@ -44,7 +43,7 @@ $(document).ready(function(){
     close: 'Ok',
     closeOnSelect: false // Close upon selecting a date,
   });
-  
+
   // Image Gallery
   $('.slider').slider({
     indicators: false,
@@ -64,6 +63,34 @@ $(document).ready(function(){
 	// Accordian
 	$('.collapsible').collapsible();
 
+
+
+
+  //*************** BASIC MODAL SETUP AND DISPLAY FUNCTIONS ****************//
+
+  //Instantiate tabs
+  $('.tabs').tabs();
+
+  //Function to set display display with correct modal depending
+  function setTabs() {
+    if($("#submit-btn").data("submit-type") == "Sign Up") {
+        $('ul.tabs').tabs('select_tab', "signup");
+    } else {
+        $('ul.tabs').tabs('select_tab', "login");
+    }
+  }
+
+  //Resets modal display on modal close
+  function clearModalInput() {
+    $("#login input").val("").removeClass("valid invalid");
+    $("#signup input").val("").removeClass("valid invalid");
+    $("#login label, #signup label").removeClass("active");
+    $("#main-err-msg").text("");
+    $("#email-format-err-msg").text("");
+    $("#pw-format-err-msg").hide();
+  }
+
+
   // Modal
   $('.modal').modal({
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -72,5 +99,7 @@ $(document).ready(function(){
     outDuration: 200, // Transition out duration
     startingTop: '4%', // Starting top style attribute
     endingTop: '10%', // Ending top style attribute
+    complete: function() { clearModalInput(); },
+    ready: function() { setTabs(); }
   });
 });
